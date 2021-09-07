@@ -1,0 +1,17 @@
+.popup__btn {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  padding: 14px 0;
+  border-radius: 2px;
+  background-color: var(--color-bg-primaty);
+  font-size: 18px;
+  color: var(--color-text);
+  font-weight: 400;
+  line-height: 22px;
+  transition: 0.3s opacity;
+}
+
+.popup__btn:hover {
+  opacity: 0.7;
+}
