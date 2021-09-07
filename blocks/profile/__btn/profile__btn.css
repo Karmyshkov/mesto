@@ -33,3 +33,19 @@
 .profile__btn:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 504px) {
+  .profile__btn {
+    width: 100%;
+  }
+
+  .profile__btn::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .profile__btn::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
