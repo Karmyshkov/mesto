@@ -5,6 +5,8 @@
   background-image: url(../../../images/heard.svg);
   background-repeat: no-repeat;
   background-size: contain;
+  -webkit-transition: 0.3s opacity;
+  -o-transition: 0.3s opacity;
   transition: 0.3s opacity;
 }
 

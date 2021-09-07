@@ -3,9 +3,12 @@
   top: -40px;
   right: -40px;
   display: inline-block;
+  -o-object-fit: cover;
   object-fit: cover;
   width: 32px;
   height: 32px;
+  -webkit-transition: 0.3s opacity;
+  -o-transition: 0.3s opacity;
   transition: 0.3s opacity;
 }
 

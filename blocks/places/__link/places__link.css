@@ -4,6 +4,8 @@
   color: var(--color-text-dark);
   font-weight: 900;
   line-height: 29px;
+  -webkit-transition: 0.3s opacity;
+  -o-transition: 0.3s opacity;
   transition: 0.3s opacity;
 }
 
