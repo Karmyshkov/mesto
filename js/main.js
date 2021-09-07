@@ -1,3 +1,4 @@
+let body = document.querySelector('.body');
 let popup = document.querySelector('.popup');
 let formElement = document.querySelector('.popup__container');
 let nameInput = document.querySelector('input[name="userName"]');
@@ -13,6 +14,7 @@ let currentValueJob = document.querySelector('.profile__description');
 btnEdit.addEventListener('click', function(evt) {
   evt.preventDefault();
   popup.classList.add('popup_opened');
+  body.classList.add('body_lock');
 });
 
 btnClose.addEventListener('click', function(evt) {

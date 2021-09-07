@@ -4,6 +4,14 @@
   color: var(--color-text);
   font-weight: 500;
   line-height: 48px;
+  margin-right: 18px;
+  margin-bottom: 16px;
+}
+
+@media screen and (max-width: 760px) {
+  .profile__name {
+    margin-bottom: 14px;
+  }
 }
 
 @media screen and (max-width: 400px) {
