@@ -1,2 +1,4 @@
 .header {
+  padding-bottom: 41px;
+  border-bottom: 1px solid var(--color-bg-third);
 }
