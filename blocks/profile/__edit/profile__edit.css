@@ -1,0 +1,27 @@
+.profile__edit {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--color-bg-secondary);
+  transition: 0.3s opacity;
+}
+
+.profile__edit::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(../../../images/pencil.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 10px;
+  height: 10px;
+}
+
+.profile__edit:hover {
+  opacity: 0.6;
+}

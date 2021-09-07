@@ -21,6 +21,14 @@
 @import url(../blocks/content/content.css);
 /* profile */
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/page/__profile/page__profile.css);
+@import url(../blocks/profile/__wrap/profile__wrap.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__inner/profile__inner.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__edit/profile__edit.css);
+@import url(../blocks/profile/__description/profile__description.css);
+@import url(../blocks/profile/__btn/profile__btn.css);
 
 /* / content */
 
