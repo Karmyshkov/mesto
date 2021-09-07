@@ -1,0 +1,27 @@
+/* settings */
+
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts.css);
+@import url(../variables/variables.css);
+@import url(../blocks/body/body.css);
+@import url(../blocks/page/page.css);
+
+/* / settings */
+
+/* header */
+
+@import url(../blocks/header/header.css);
+
+/* / header */
+
+/* content */
+
+@import url(../blocks/content/content.css);
+
+/* / content */
+
+/* footer */
+
+@import url(../blocks/footer/footer.css);
+
+/* / footer */
