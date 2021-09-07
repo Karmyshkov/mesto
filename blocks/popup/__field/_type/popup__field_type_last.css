@@ -1,3 +1,9 @@
 .popup__field_type_last {
   margin-bottom: 48px;
 }
+
+@media screen and (max-width: 424px) {
+  .popup__field_type_last {
+    margin-bottom: 45px;
+  }
+}

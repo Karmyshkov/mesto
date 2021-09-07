@@ -1,4 +1,11 @@
 .profile__row {
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
+}
+
+@media screen and (max-width: 760px) {
+  .profile__row {
+    margin-bottom: 14px;
+  }
 }

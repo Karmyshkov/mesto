@@ -20,6 +20,7 @@ btnEdit.addEventListener('click', function(evt) {
 btnClose.addEventListener('click', function(evt) {
   evt.preventDefault();
   popup.classList.remove('popup_opened');
+  body.classList.remove('body_lock');
 });
 
 /** 
@@ -42,6 +43,7 @@ function formSubmitHandler (evt) {
     currentValueJob.textContent = jobInput.value;
 
     popup.classList.remove('popup_opened');
+    body.classList.remove('body_lock');
 }
 
 formElement.addEventListener('submit', formSubmitHandler); 
