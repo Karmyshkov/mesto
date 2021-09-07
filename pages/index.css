@@ -29,6 +29,16 @@
 @import url(../blocks/profile/__edit/profile__edit.css);
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__btn/profile__btn.css);
+/* places */
+@import url(../blocks/places/places.css);
+@import url(../blocks/page/__places/page__places.css);
+@import url(../blocks/places/__cards/places__cards.css);
+@import url(../blocks/places/__card/places__card.css);
+@import url(../blocks/places/__img/places__img.css);
+@import url(../blocks/places/__inner/places__inner.css);
+@import url(../blocks/places/__title/places__title.css);
+@import url(../blocks/places/__link/places__link.css);
+@import url(../blocks/places/__icon/places__icon.css);
 
 /* / content */
 

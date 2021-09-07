@@ -1,0 +1,13 @@
+.places__icon {
+  display: inline-block;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/heard.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: 0.3s opacity;
+}
+
+.places__icon:hover {
+  opacity: 0.5;
+}

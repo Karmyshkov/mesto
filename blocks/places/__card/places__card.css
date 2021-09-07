@@ -1,0 +1,6 @@
+.places__card {
+  list-style: none;
+  background-color: var(--color-bg-secondary);
+  border-radius: 10px;
+  overflow: hidden;
+}
