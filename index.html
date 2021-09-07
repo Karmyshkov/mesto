@@ -36,8 +36,8 @@
               alt="Аватар Жак-Ив Кусто"
             />
             <div class="profile__inner">
-              <h1 class="profile__name">
-                Жак-Ив Кусто
+              <h1 class="profile__text">
+                <span class="profile__name">Жак-Ив Кусто</span>
                 <a class="profile__edit" href="#"></a>
               </h1>
               <p class="profile__description">Исследователь океана</p>
@@ -165,8 +165,12 @@
     <div class="popup">
       <form class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__field" type="text" />
-        <input class="popup__field popup__field_type_last" type="text" />
+        <input class="popup__field" type="text" name="userName" />
+        <input
+          class="popup__field popup__field_type_last"
+          type="text"
+          name="userJob"
+        />
         <input class="popup__btn" type="submit" value="Сохранить" />
         <a class="popup__close" href="">
           <img src="./images/close.svg" alt="Кнопка закрыть" />
@@ -175,5 +179,6 @@
     </div>
 
     <!-- / popup -->
+    <script src="./js/main.js"></script>
   </body>
 </html>
