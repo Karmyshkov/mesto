@@ -13,3 +13,29 @@
   display: flex;
   flex-direction: column;
 }
+
+@media screen and (max-width: 968px) {
+  .page {
+    padding: 35px 0 50px;
+    max-width: none;
+    margin: 0 44px;
+  }
+}
+
+@media screen and (max-width: 910px) {
+  .page {
+    margin: 0 30px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .page {
+    padding: 28px 0 36px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .page {
+    margin: 0 19px;
+  }
+}

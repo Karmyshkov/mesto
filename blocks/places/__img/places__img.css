@@ -4,3 +4,58 @@
   width: 282px;
   height: 282px;
 }
+
+@media screen and (max-width: 950px) {
+  .places__img {
+    height: 250px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .places__img {
+    height: 210px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .places__img {
+    width: 100%;
+    height: 364px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .places__img {
+    height: 280px;
+  }
+}
+
+@media screen and (max-width: 590px) {
+  .places__img {
+    height: 230px;
+  }
+}
+
+@media screen and (max-width: 504px) {
+  .places__img {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .places__img {
+    height: 320px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .places__img {
+    height: 290px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .places__img {
+    height: 282px;
+  }
+}

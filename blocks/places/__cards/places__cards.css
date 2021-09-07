@@ -5,3 +5,17 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 17px;
 }
+
+@media screen and (max-width: 760px) {
+  .places__cards {
+    grid-template-columns: repeat(2, minmax(224px, 364px));
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 504px) {
+  .places__cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
