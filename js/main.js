@@ -1,15 +1,16 @@
-let body = document.querySelector('.body');
-let popup = document.querySelector('.popup');
-let formElement = document.querySelector('.popup__container');
-let nameInput = document.querySelector('input[name="userName"]');
-let jobInput = document.querySelector('input[name="userJob"]');
+const body = document.querySelector('.body');
+const popup = document.querySelector('.popup');
+const formElement = document.querySelector('.popup__container');
+const nameInput = document.querySelector('input[name="userName"]');
+const jobInput = document.querySelector('input[name="userJob"]');
 
-let btnEdit = document.querySelector('.profile__edit');
-let btnClose = formElement.querySelector('.popup__close');
-let btnSave = formElement.querySelector('.popup__btn');
+const btnEdit = document.querySelector('.profile__edit');
+const btnClose = formElement.querySelector('.popup__close');
+const btnSave = formElement.querySelector('.popup__btn');
 
-let currentValueName = document.querySelector('.profile__name');
-let currentValueJob = document.querySelector('.profile__description');
+const currentValueName = document.querySelector('.profile__name');
+const currentValueJob = document.querySelector('.profile__description');
+
 
 btnEdit.addEventListener('click', function(evt) {
   evt.preventDefault();
