@@ -1,14 +1,11 @@
 :root {
   --ff: "Inter", serif;
-
   --color-text: #fff;
   --color-text-dark: #000;
   --color-text-secondary: #545454;
-
   --color-bg-primaty: #000;
   --color-bg-secondary: #fff;
   --color-bg-third: #545454;
   --color-bg-popap: rgba(0, 0, 0, 0.8);
-
   --color-border: rgba(0, 0, 0, 0.2);
 }
