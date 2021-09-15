@@ -15,19 +15,17 @@ const currentValueJob = document.querySelector('.profile__description');
 btnEdit.addEventListener('click', function(evt) {
   evt.preventDefault();
   popup.classList.add('popup_opened');
-  body.classList.add('body_lock');
 });
 
 btnClose.addEventListener('click', function(evt) {
   evt.preventDefault();
   popup.classList.remove('popup_opened');
-  body.classList.remove('body_lock');
 });
 
 /** 
  * Добавлеяет текст в input
  * param {object} name, объект содержащий имя пользователя
- * param {object} job, объект содержаший информацию об работе
+ * param {object} job, объект содержаший информацию о работе
 */
 
 function renderData (name, job) {
