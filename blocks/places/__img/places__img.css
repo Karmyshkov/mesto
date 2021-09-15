@@ -1,5 +1,4 @@
 .places__img {
-  display: inline-block;
   -o-object-fit: cover;
   object-fit: cover;
   width: 282px;
