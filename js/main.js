@@ -11,6 +11,15 @@ const btnSave = formElement.querySelector('.popup__btn');
 const currentValueName = document.querySelector('.profile__name');
 const currentValueJob = document.querySelector('.profile__description');
 
+/** 
+ * Ошибка, возникающая в случае пустой строки
+ * param {String} message, сообщение об ошибке
+*/
+
+function isEmpty(message) {
+  this.message = message;
+  this.name = 'isEmpty';
+}
 
 btnEdit.addEventListener('click', function(evt) {
   evt.preventDefault();
@@ -36,13 +45,25 @@ function renderData (name, job) {
 renderData(currentValueName, currentValueJob);
 
 function formSubmitHandler (evt) {
-    evt.preventDefault(); 
-    
+  try {
+    evt.preventDefault();
+
+    if (nameInput.value.length === 0) {
+      throw new isEmpty('Имя не может быть пустым');
+    }
+
+    if (jobInput.value.length === 0) {
+      throw new isEmpty('Поле работа не может быть пустым');
+    }
+
     currentValueName.textContent = nameInput.value;
     currentValueJob.textContent = jobInput.value;
 
     popup.classList.remove('popup_opened');
     body.classList.remove('body_lock');
+  } catch (e) {
+    alert(e.message);
+  }
 }
 
 formElement.addEventListener('submit', formSubmitHandler); 
