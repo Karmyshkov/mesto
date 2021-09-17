@@ -22,13 +22,12 @@ function closePopap () {
 }
 
 function formSubmitHandler (evt) {
-  
     evt.preventDefault();
 
     currentValueName.textContent = nameInput.value;
     currentValueJob.textContent = jobInput.value;
 
-    popup.classList.remove('popup_opened');
+    closePopap();
 }
 
 formElement.addEventListener('submit', formSubmitHandler); 
