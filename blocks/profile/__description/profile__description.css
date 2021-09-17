@@ -1,5 +1,8 @@
 .profile__description {
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   max-width: 336px;
   font-size: 18px;
   color: var(--color-text);

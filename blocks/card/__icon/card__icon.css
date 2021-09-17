@@ -1,4 +1,7 @@
-.places__icon {
+.card__icon {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
   width: 22px;
   height: 19px;
   background-image: url(../../../images/heard.svg);
@@ -9,6 +12,6 @@
   transition: 0.3s opacity;
 }
 
-.places__icon:hover {
+.card__icon:hover {
   opacity: 0.5;
 }

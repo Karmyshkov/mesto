@@ -1,6 +1,6 @@
 .header {
   padding-bottom: 41px;
-  border-bottom: 1px solid var(--color-bg-third);
+  border-bottom: 1px solid var(--color-line);
 }
 
 @media screen and (max-width: 760px) {

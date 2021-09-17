@@ -13,11 +13,7 @@
 
       <header class="header page__header">
         <a href="#">
-          <img
-            class="header__logo"
-            src="./images/logo.svg"
-            alt="Логотип веб-сайта Место"
-          />
+          <img class="header__logo" src="./images/logo.svg" alt="Логотип веб-сайта Место" />
         </a>
       </header>
 
@@ -30,24 +26,16 @@
 
         <section class="profile page__profile">
           <div class="profile__wrap">
-            <img
-              class="profile__avatar"
-              src="./images/avatar.jpg"
-              alt="Аватар Жак-Ив Кусто"
-            />
+            <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар пользователя" />
             <div class="profile__inner">
               <div class="profile__row">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <a class="profile__edit" href="#">
-                  <img src="./images/pencil.svg" alt="Кнопка редактировать" />
-                </a>
+                <button class="profile__edit" type="button" aria-label="Изменить"></button>
               </div>
               <p class="profile__description">Исследователь океана</p>
             </div>
           </div>
-          <a class="profile__btn" href="#">
-            <img src="./images/plus.svg" alt="Кнопка добавить" />
-          </a>
+          <button class="profile__btn" type="button" aria-label="Добавить"></button>
         </section>
 
         <!-- / profile -->
@@ -56,75 +44,51 @@
 
         <section class="places page__places">
           <ul class="places__cards">
-            <li class="places__card">
-              <img
-                class="places__img"
-                src="./images/places-karachayevsk.jpg"
-                alt="Карачаевск"
-              />
-              <div class="places__inner">
-                <h2 class="places__title">Карачаевск</h2>
-                <a class="places__icon" href="#"></a>
+            <li class="card">
+              <img class="card__img" src="./images/places-karachayevsk.jpg" alt="Карачаевск" />
+              <div class="card__inner">
+                <h2 class="card__title">Карачаевск</h2>
+                <button class="card__icon" type="button" aria-label="Лайкнуть"></button>
               </div>
             </li>
 
-            <li class="places__card">
-              <img
-                class="places__img"
-                src="./images/places-elbrus.jpg"
-                alt="Гора Эльбрус"
-              />
-              <div class="places__inner">
-                <h2 class="places__title">Гора Эльбрус</h2>
-                <a class="places__icon" href="#"></a>
+            <li class="card">
+              <img class="card__img" src="./images/places-elbrus.jpg" alt="Гора Эльбрус" />
+              <div class="card__inner">
+                <h2 class="card__title">Гора Эльбрус</h2>
+                <button class="card__icon" type="button" aria-label="Лайкнуть"></button>
               </div>
             </li>
 
-            <li class="places__card">
-              <img
-                class="places__img"
-                src="./images/places-dombay.jpg"
-                alt="Домбай"
-              />
-              <div class="places__inner">
-                <h2 class="places__title">Домбай</h2>
-                <a class="places__icon" href="#"></a>
+            <li class="card">
+              <img class="card__img" src="./images/places-dombay.jpg" alt="Домбай" />
+              <div class="card__inner">
+                <h2 class="card__title">Домбай</h2>
+                <button class="card__icon" type="button" aria-label="Лайкнуть"></button>
               </div>
             </li>
 
-            <li class="places__card">
-              <img
-                class="places__img"
-                src="./images/places-karachayevsk.jpg"
-                alt="Карачаевск"
-              />
-              <div class="places__inner">
-                <h2 class="places__title">Карачаевск</h2>
-                <a class="places__icon" href="#"></a>
+            <li class="card">
+              <img class="card__img" src="./images/places-karachayevsk.jpg" alt="Карачаевск" />
+              <div class="card__inner">
+                <h2 class="card__title">Карачаевск</h2>
+                <button class="card__icon" type="button" aria-label="Лайкнуть"></button>
               </div>
             </li>
 
-            <li class="places__card">
-              <img
-                class="places__img"
-                src="./images/places-elbrus.jpg"
-                alt="Гора Эльбрус"
-              />
-              <div class="places__inner">
-                <h2 class="places__title">Гора Эльбрус</h2>
-                <a class="places__icon" href="#"></a>
+            <li class="card">
+              <img class="card__img" src="./images/places-elbrus.jpg" alt="Гора Эльбрус" />
+              <div class="card__inner">
+                <h2 class="card__title">Гора Эльбрус</h2>
+                <button class="card__icon" type="button" aria-label="Лайкнуть"></button>
               </div>
             </li>
 
-            <li class="places__card">
-              <img
-                class="places__img"
-                src="./images/places-dombay.jpg"
-                alt="Домбай"
-              />
-              <div class="places__inner">
-                <h2 class="places__title">Домбай</h2>
-                <a class="places__icon" href="#"></a>
+            <li class="card">
+              <img class="card__img" src="./images/places-dombay.jpg" alt="Домбай" />
+              <div class="card__inner">
+                <h2 class="card__title">Домбай</h2>
+                <button class="card__icon" type="button" aria-label="Лайкнуть"></button>
               </div>
             </li>
           </ul>
@@ -147,19 +111,17 @@
     <!-- popup -->
 
     <div class="popup">
-      <form class="popup__container">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__field" type="text" name="userName" />
-        <input
-          class="popup__field popup__field_type_last"
-          type="text"
-          name="userJob"
-        />
-        <input class="popup__btn" type="submit" value="Сохранить" />
-        <a class="popup__close" href="">
-          <img src="./images/close.svg" alt="Кнопка закрыть" />
-        </a>
-      </form>
+      <div class="popup__container">
+        <div class="popup__inner">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <form class="popup__form" name="form_edit_profile">
+            <input class="popup__field" type="text" name="userName" />
+            <input class="popup__field" type="text" name="userJob" />
+            <button class="popup__btn" type="submit">Сохранить</button>
+            <button class="popup__close" type="button" aria-label="Закрыть"></button>
+          </form>
+        </div>
+      </div>
     </div>
 
     <!-- / popup -->

@@ -1,5 +1,8 @@
 .profile__name {
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   font-size: 42px;
   color: var(--color-text);
   font-weight: 500;
