@@ -1,8 +1,5 @@
 .popup__container {
   position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 430px;
@@ -13,27 +10,8 @@
   box-shadow: 0px 0px 25px var(--color-shodow);
 }
 
-@media screen and (max-width: 640px) {
-  .popup__inner {
-    max-width: 380px;
-  }
-}
-
-@media screen and (max-width: 424px) {
-  .popup__inner {
-    max-width: 340px;
+@media screen and (max-width: 485px) {
+  .popup__container {
     padding: 25px 22px;
-  }
-}
-
-@media screen and (max-width: 382px) {
-  .popup__inner {
-    max-width: 310px;
-  }
-}
-
-@media screen and (max-width: 352px) {
-  .popup__inner {
-    max-width: 282px;
   }
 }

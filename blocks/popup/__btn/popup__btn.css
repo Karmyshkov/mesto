@@ -3,6 +3,7 @@
   font-family: inherit;
   border: none;
   padding: 14px 0;
+  width: 358px;
   border-radius: 2px;
   background-color: var(--color-bg-primaty);
   font-size: 18px;
@@ -18,9 +19,16 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 424px) {
+@media screen and (max-width: 485px) {
   .popup__btn {
+    width: auto;
     font-size: 14px;
     line-height: 17px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .popup__btn {
+    width: 238px;
   }
 }
