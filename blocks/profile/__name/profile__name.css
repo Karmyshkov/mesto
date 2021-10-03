@@ -10,15 +10,16 @@
   margin-right: 18px;
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 486px) {
   .profile__name {
-    font-size: 34px;
-    line-height: 33px;
+    max-width: 300px;
   }
 }
 
-@media screen and (max-width: 370px) {
+@media screen and (max-width: 390px) {
   .profile__name {
     font-size: 27px;
+    line-height: 33px;
+    max-width: 224px;
   }
 }

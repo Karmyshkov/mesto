@@ -1,5 +1,5 @@
 :root {
-  --ff: "Inter", "Arial", sans-serif;
+  --ff: 'Inter', 'Arial', sans-serif;
   --color-text: #fff;
   --color-text-dark: #000;
   --color-grey: #545454;
@@ -7,5 +7,6 @@
   --color-bg-secondary: #fff;
   --color-bg-popap: rgba(0, 0, 0, 0.5);
   --color-border: rgba(0, 0, 0, 0.2);
-  --color-line: rgba(255, 255, 255, 0.2);
+  --color-line: rgba(84, 84, 84, 0.7);
+  --color-shodow: rgba(0, 0, 0, 0.15);
 }
