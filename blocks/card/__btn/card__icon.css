@@ -1,4 +1,4 @@
-.card__icon {
+.card__btn {
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -12,6 +12,6 @@
   transition: 0.3s opacity;
 }
 
-.card__icon:hover {
+.card__btn:hover {
   opacity: 0.5;
 }
