@@ -9,4 +9,6 @@
   width: 100%;
   height: 100%;
   background-color: var(--color-bg-popap);
+  opacity: 0;
+  transition: 0.2s ease-in;
 }
