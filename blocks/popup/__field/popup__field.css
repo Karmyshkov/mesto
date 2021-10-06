@@ -14,3 +14,7 @@
 .popup__field:last-of-type {
   margin-bottom: 48px;
 }
+
+.popup__field::placeholder {
+  color: var(--color-placeholder);
+}
