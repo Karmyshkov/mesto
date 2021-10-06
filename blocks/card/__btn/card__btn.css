@@ -9,7 +9,7 @@
   background-size: contain;
   -webkit-transition: 0.3s opacity;
   -o-transition: 0.3s opacity;
-  transition: 0.3s opacity;
+  transition: opacity 0.3s, background 0.5s;
 }
 
 .card__btn:hover {

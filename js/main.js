@@ -46,7 +46,13 @@ const renderCard = obj => {
   newCard.querySelector('.card__img').src = obj.link;
   newCard.querySelector('.card__title').textContent = obj.name;
 
+  const btnLike = newCard.querySelector('.card__btn_type_like');
+
   cardList.append(newCard);
+
+  btnLike.addEventListener('click', function () {
+    this.classList.toggle('card__btn_active');
+  });
 }
 
 initialCards.map(renderCard);
@@ -78,5 +84,4 @@ btnEdit.addEventListener('click', () => openForm(popupEditProfile, addInfoForm))
 btnCloseEditForm.addEventListener('click', () => closePopap(popupEditProfile));
 btnAddCard.addEventListener('click', () => openForm(popupAddCard));
 btnCloseAddCardForm.addEventListener('click', () => closePopap(popupAddCard));
-
 formElement.addEventListener('submit', formSubmitHandler); 
