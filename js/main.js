@@ -48,12 +48,18 @@ const renderCard = obj => {
   newCard.querySelector('.card__title').textContent = obj.name;
 
   const btnLike = newCard.querySelector('.card__btn_type_like');
+  const btnDelete = newCard.querySelector('.card__btn_type_delete');
 
   cardList.append(newCard);
 
   btnLike.addEventListener('click', function () {
     this.classList.toggle('card__btn_active');
   });
+
+  btnDelete.addEventListener('click', function (evt) {
+    const currentElement = evt.target;
+    currentElement.parentElement.remove();
+  })
 }
 
 initialCards.map(renderCard);
