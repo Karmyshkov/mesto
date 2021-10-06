@@ -1,2 +1,9 @@
 .card__btn_type_like {
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../../images/heard.svg);
+}
+
+.card__btn_type_like:hover {
+  opacity: 0.5;
 }

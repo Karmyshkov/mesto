@@ -2,16 +2,9 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
-  width: 22px;
-  height: 19px;
-  background-image: url(../../../images/heard.svg);
   background-repeat: no-repeat;
   background-size: contain;
   -webkit-transition: 0.3s opacity;
   -o-transition: 0.3s opacity;
   transition: opacity 0.3s, background 0.5s;
-}
-
-.card__btn:hover {
-  opacity: 0.5;
 }
