@@ -4,14 +4,16 @@ const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const popuMoreCard = document.querySelector('.popup_type_more');
 const formElementArr = document.querySelectorAll('.popup__container');
-const nameInput = document.getElementById('userName');
-const jobInput = document.getElementById('userJob');
+const nameInput = document.getElementById('user-name');
+const jobInput = document.getElementById('user-job');
 const btnEdit = document.querySelector('.profile__edit');
 const btnAddCard = document.querySelector('.profile__btn');
 const btnCloseFormProfile = popupEditProfile.querySelector('.popup__close');
 const btnCloseFormAddCard = popupAddCard.querySelector('.popup__close');
 const currentValueName = document.querySelector('.profile__name');
 const currentValueJob = document.querySelector('.profile__description');
+const newPlace = document.getElementById('new-place');
+const newImg = document.getElementById('new-img');
 
 const initialCards = [
   {

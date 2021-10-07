@@ -10,9 +10,9 @@
   color: var(--color-text);
   font-weight: 400;
   line-height: 22px;
-  -webkit-transition: 0.3s opacity;
-  -o-transition: 0.3s opacity;
-  transition: 0.3s opacity;
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 
 .popup__btn:hover {
