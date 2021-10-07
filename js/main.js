@@ -120,8 +120,8 @@ function renderCard (obj) {
     const currentElement = evt.target.parentElement;
     const currentImg = currentElement.querySelector('.card__img').src;
     const currentText = currentElement.querySelector('.card__title').textContent;
-    const popapImg = popuMoreCard.querySelector('.popap__img');
-    const popapText = popuMoreCard.querySelector('.popap__text');
+    const popapImg = popuMoreCard.querySelector('.popup__img');
+    const popapText = popuMoreCard.querySelector('.popup__text');
 
     popapImg.src = currentImg;
     popapImg.alt = currentText;
