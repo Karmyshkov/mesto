@@ -136,7 +136,7 @@ btnAddCard.addEventListener('click', () => openForm(popupAddCard));
 btnClose.addEventListener('click', closePopap);
 popuMoreCard.addEventListener('click', closePopap);
 formElementArr.forEach(item => {
-  if (item.parentElement.classList[1] === 'popup_type_edit-profile') {
+  if (item.parentElement.classList.contains('popup_type_edit-profile')) {
     item.addEventListener('submit', formSubmitHandler);
   } else {
     item.addEventListener('submit', addCardHandler);
