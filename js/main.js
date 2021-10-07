@@ -99,12 +99,14 @@ function formSubmitHandler (evt) {
 function renderCard (obj) {
   const newCard = cardTemplate.content.cloneNode(true);
 
-  newCard.querySelector('.card__img').src = obj.link;
-  newCard.querySelector('.card__title').textContent = obj.name;
-
+  const cardTitle = newCard.querySelector('.card__title');
   const btnLike = newCard.querySelector('.card__btn_type_like');
   const btnDelete = newCard.querySelector('.card__btn_type_delete');
   const cardImg = newCard.querySelector('.card__img');
+
+  cardImg.src = obj.link;
+  cardImg.alt = obj.name;
+  cardTitle.textContent = obj.name;
   
   cardList.append(newCard);
 
@@ -121,8 +123,13 @@ function renderCard (obj) {
     const currentElement = evt.target.parentElement;
     const currentImg = currentElement.querySelector('.card__img').src;
     const currentText = currentElement.querySelector('.card__title').textContent;
-    popupMore.querySelector('.popap__img').src = currentImg;
-    popupMore.querySelector('.popap__text').textContent = currentText;
+    const popapImg = popupMore.querySelector('.popap__img');
+    const popapText = popupMore.querySelector('.popap__text');
+
+    popapImg.src = currentImg;
+    popapImg.alt = currentText;
+    popapText.textContent = currentText;
+
     openForm(popupMore);
   })
 }
