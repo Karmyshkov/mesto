@@ -1,4 +1,5 @@
 .card__img {
+  cursor: pointer;
   -o-object-fit: cover;
   object-fit: cover;
   width: 282px;

@@ -2,6 +2,7 @@ const cardTemplate = document.querySelector('.card-template');
 const cardList = document.querySelector('.places__cards');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
+const popuMoreCard = document.querySelector('.popup_type_more');
 const formElementArr = document.querySelectorAll('.popup__container');
 const nameInput = document.getElementById('userName');
 const jobInput = document.getElementById('userJob');
@@ -13,6 +14,7 @@ const currentValueName = document.querySelector('.profile__name');
 const currentValueJob = document.querySelector('.profile__description');
 const newPlace = document.getElementById('newPlace');
 const newImg = document.getElementById('newImg');
+const popupMore = document.querySelector('.popup_type_more');
 
 const initialCards = [
   {
@@ -41,7 +43,24 @@ const initialCards = [
   }
 ];
 
-const renderCard = obj => {
+// удалять слушатели
+
+function addInfoForm () {
+  nameInput.value  = currentValueName.textContent;
+  jobInput.value = currentValueJob.textContent;
+}
+
+function openForm (element, fnc = null) {
+  element.classList.add('popup_opened');
+  if (typeof fnc !== "object") fnc();
+}
+
+function closePopap () {
+  const activePopup = document.querySelector('.popup_opened')
+  if (activePopup) activePopup.classList.remove('popup_opened');
+}
+
+function renderCard (obj) {
   const newCard = cardTemplate.content.cloneNode(true);
 
   newCard.querySelector('.card__img').src = obj.link;
@@ -49,7 +68,8 @@ const renderCard = obj => {
 
   const btnLike = newCard.querySelector('.card__btn_type_like');
   const btnDelete = newCard.querySelector('.card__btn_type_delete');
-
+  const cardImg = newCard.querySelector('.card__img');
+  
   cardList.append(newCard);
 
   btnLike.addEventListener('click', function () {
@@ -59,26 +79,19 @@ const renderCard = obj => {
   btnDelete.addEventListener('click', function (evt) {
     const currentElement = evt.target;
     currentElement.parentElement.remove();
+  });
+
+  cardImg.addEventListener('click', function (evt) {
+    const currentElement = evt.target.parentElement;
+    const currentImg = currentElement.querySelector('.card__img').src;
+    const currentText = currentElement.querySelector('.card__title').textContent;
+    popupMore.querySelector('.popap__img').src = currentImg;
+    popupMore.querySelector('.popap__text').textContent = currentText;
+    openForm(popupMore);
   })
 }
 
-initialCards.map(renderCard);
-
-const addInfoForm = () => {
-  nameInput.value  = currentValueName.textContent;
-  jobInput.value = currentValueJob.textContent;
-}
-
-const openForm = (element, fnc = null) => {
-  element.classList.add('popup_opened');
-  if (typeof fnc !== "object") fnc();
-}
-
-const closePopap = element => {
-  element.classList.remove('popup_opened');
-}
-
-const addCardHandler = evt => {
+function addCardHandler (evt) {
   evt.preventDefault();
 
   const newCard = cardTemplate.content.cloneNode(true);
@@ -93,22 +106,23 @@ const addCardHandler = evt => {
 
   cardList.prepend(newCard);
 
-  closePopap(popupAddCard);
+  closePopap();
 }
 
-const formSubmitHandler = evt => {
+function formSubmitHandler (evt) {
     evt.preventDefault();
 
     currentValueName.textContent = nameInput.value;
     currentValueJob.textContent = jobInput.value;
 
-    closePopap(popupEditProfile);
+    closePopap();
 }
 
 btnEdit.addEventListener('click', () => openForm(popupEditProfile, addInfoForm));
-btnCloseEditForm.addEventListener('click', () => closePopap(popupEditProfile));
+btnCloseEditForm.addEventListener('click', closePopap);
 btnAddCard.addEventListener('click', () => openForm(popupAddCard));
-btnCloseAddCardForm.addEventListener('click', () => closePopap(popupAddCard));
+btnCloseAddCardForm.addEventListener('click', closePopap);
+popuMoreCard.addEventListener('click', closePopap);
 
 formElementArr.forEach(item => {
   if (item.parentElement.classList[1] === 'popup_type_edit-profile') {
@@ -117,3 +131,5 @@ formElementArr.forEach(item => {
     item.addEventListener('submit', addCardHandler);
   }
 });
+
+initialCards.map(renderCard);
