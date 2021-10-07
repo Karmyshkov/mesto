@@ -8,7 +8,8 @@ const nameInput = document.getElementById('userName');
 const jobInput = document.getElementById('userJob');
 const btnEdit = document.querySelector('.profile__edit');
 const btnAddCard = document.querySelector('.profile__btn');
-const btnClose = popupEditProfile.querySelector('.popup__close');
+const btnCloseFormProfile = popupEditProfile.querySelector('.popup__close');
+const btnCloseFormAddCard = popupAddCard.querySelector('.popup__close');
 const currentValueName = document.querySelector('.profile__name');
 const currentValueJob = document.querySelector('.profile__description');
 
@@ -131,10 +132,11 @@ function renderCard (obj) {
 }
 
 btnEdit.addEventListener('click', () => openForm(popupEditProfile, addInfoForm));
-btnClose.addEventListener('click', closePopap);
 btnAddCard.addEventListener('click', () => openForm(popupAddCard));
-btnClose.addEventListener('click', closePopap);
+btnCloseFormProfile.addEventListener('click', closePopap);
+btnCloseFormAddCard.addEventListener('click', closePopap);
 popuMoreCard.addEventListener('click', closePopap);
+
 formElementArr.forEach(item => {
   if (item.parentElement.classList.contains('popup_type_edit-profile')) {
     item.addEventListener('submit', formSubmitHandler);
