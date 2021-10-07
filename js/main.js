@@ -8,13 +8,9 @@ const nameInput = document.getElementById('userName');
 const jobInput = document.getElementById('userJob');
 const btnEdit = document.querySelector('.profile__edit');
 const btnAddCard = document.querySelector('.profile__btn');
-const btnCloseEditForm = popupEditProfile.querySelector('.popup__close');
-const btnCloseAddCardForm = popupAddCard.querySelector('.popup__close');
+const btnClose = popupEditProfile.querySelector('.popup__close');
 const currentValueName = document.querySelector('.profile__name');
 const currentValueJob = document.querySelector('.profile__description');
-const newPlace = document.getElementById('newPlace');
-const newImg = document.getElementById('newImg');
-const popupMore = document.querySelector('.popup_type_more');
 
 const initialCards = [
   {
@@ -58,6 +54,23 @@ function closePopap () {
   if (activePopup) activePopup.classList.remove('popup_opened');
 }
 
+function likeCard (elem) {
+  const btnLike = elem.querySelector('.card__btn_type_like');
+
+  btnLike.addEventListener('click', function () {
+    this.classList.toggle('card__btn_active');
+  });
+}
+
+function deleteCard (elem) {
+  const btnDelete = elem.querySelector('.card__btn_type_delete');
+
+  btnDelete.addEventListener('click', function (evt) {
+    const currentElement = evt.target;
+    currentElement.parentElement.remove();
+  });
+}
+
 function addCardHandler (evt) {
   evt.preventDefault();
 
@@ -70,21 +83,13 @@ function addCardHandler (evt) {
 
   newCard.querySelector('.card__img').src = cardValue.link;
   newCard.querySelector('.card__title').textContent = cardValue.name;
-  const btnLike = newCard.querySelector('.card__btn_type_like');
-  const btnDelete = newCard.querySelector('.card__btn_type_delete');
+
+  likeCard(newCard);
+  deleteCard(newCard);
 
   cardList.prepend(newCard);
 
   closePopap();
-
-  btnLike.addEventListener('click', function () {
-    this.classList.toggle('card__btn_active');
-  });
-
-  btnDelete.addEventListener('click', function (evt) {
-    const currentElement = evt.target;
-    currentElement.parentElement.remove();
-  });
 }
 
 function formSubmitHandler (evt) {
@@ -98,48 +103,38 @@ function formSubmitHandler (evt) {
 
 function renderCard (obj) {
   const newCard = cardTemplate.content.cloneNode(true);
-
   const cardTitle = newCard.querySelector('.card__title');
-  const btnLike = newCard.querySelector('.card__btn_type_like');
-  const btnDelete = newCard.querySelector('.card__btn_type_delete');
   const cardImg = newCard.querySelector('.card__img');
 
   cardImg.src = obj.link;
   cardImg.alt = obj.name;
   cardTitle.textContent = obj.name;
+
+  likeCard(newCard);
+  deleteCard(newCard);
   
   cardList.append(newCard);
-
-  btnLike.addEventListener('click', function () {
-    this.classList.toggle('card__btn_active');
-  });
-
-  btnDelete.addEventListener('click', function (evt) {
-    const currentElement = evt.target;
-    currentElement.parentElement.remove();
-  });
 
   cardImg.addEventListener('click', function (evt) {
     const currentElement = evt.target.parentElement;
     const currentImg = currentElement.querySelector('.card__img').src;
     const currentText = currentElement.querySelector('.card__title').textContent;
-    const popapImg = popupMore.querySelector('.popap__img');
-    const popapText = popupMore.querySelector('.popap__text');
+    const popapImg = popuMoreCard.querySelector('.popap__img');
+    const popapText = popuMoreCard.querySelector('.popap__text');
 
     popapImg.src = currentImg;
     popapImg.alt = currentText;
     popapText.textContent = currentText;
 
-    openForm(popupMore);
+    openForm(popuMoreCard);
   })
 }
 
 btnEdit.addEventListener('click', () => openForm(popupEditProfile, addInfoForm));
-btnCloseEditForm.addEventListener('click', closePopap);
+btnClose.addEventListener('click', closePopap);
 btnAddCard.addEventListener('click', () => openForm(popupAddCard));
-btnCloseAddCardForm.addEventListener('click', closePopap);
+btnClose.addEventListener('click', closePopap);
 popuMoreCard.addEventListener('click', closePopap);
-
 formElementArr.forEach(item => {
   if (item.parentElement.classList[1] === 'popup_type_edit-profile') {
     item.addEventListener('submit', formSubmitHandler);
