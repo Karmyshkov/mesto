@@ -43,8 +43,6 @@ const initialCards = [
   }
 ];
 
-// удалять слушатели
-
 function addInfoForm () {
   nameInput.value  = currentValueName.textContent;
   jobInput.value = currentValueJob.textContent;
@@ -56,8 +54,46 @@ function openForm (element, fnc = null) {
 }
 
 function closePopap () {
-  const activePopup = document.querySelector('.popup_opened')
+  const activePopup = document.querySelector('.popup_opened');
   if (activePopup) activePopup.classList.remove('popup_opened');
+}
+
+function addCardHandler (evt) {
+  evt.preventDefault();
+
+  const newCard = cardTemplate.content.cloneNode(true);
+
+  let cardValue = {
+    name: newPlace.value,
+    link: newImg.value
+  }
+
+  newCard.querySelector('.card__img').src = cardValue.link;
+  newCard.querySelector('.card__title').textContent = cardValue.name;
+  const btnLike = newCard.querySelector('.card__btn_type_like');
+  const btnDelete = newCard.querySelector('.card__btn_type_delete');
+
+  cardList.prepend(newCard);
+
+  closePopap();
+
+  btnLike.addEventListener('click', function () {
+    this.classList.toggle('card__btn_active');
+  });
+
+  btnDelete.addEventListener('click', function (evt) {
+    const currentElement = evt.target;
+    currentElement.parentElement.remove();
+  });
+}
+
+function formSubmitHandler (evt) {
+    evt.preventDefault();
+
+    currentValueName.textContent = nameInput.value;
+    currentValueJob.textContent = jobInput.value;
+
+    closePopap();
 }
 
 function renderCard (obj) {
@@ -89,33 +125,6 @@ function renderCard (obj) {
     popupMore.querySelector('.popap__text').textContent = currentText;
     openForm(popupMore);
   })
-}
-
-function addCardHandler (evt) {
-  evt.preventDefault();
-
-  const newCard = cardTemplate.content.cloneNode(true);
-
-  let cardValue = {
-    name: newPlace.value,
-    link: newImg.value
-  }
-
-  newCard.querySelector('.card__img').src = cardValue.link;
-  newCard.querySelector('.card__title').textContent = cardValue.name;
-
-  cardList.prepend(newCard);
-
-  closePopap();
-}
-
-function formSubmitHandler (evt) {
-    evt.preventDefault();
-
-    currentValueName.textContent = nameInput.value;
-    currentValueJob.textContent = jobInput.value;
-
-    closePopap();
 }
 
 btnEdit.addEventListener('click', () => openForm(popupEditProfile, addInfoForm));
