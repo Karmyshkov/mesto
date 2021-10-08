@@ -74,6 +74,15 @@ function deleteCard (elem) {
   });
 }
 
+function formSubmitHandler (evt) {
+    evt.preventDefault();
+
+    currentValueName.textContent = nameInput.value;
+    currentValueJob.textContent = jobInput.value;
+
+    closePopap();
+}
+
 function openPopapImg (elem) {
   const currentImg = elem.querySelector('.card__img').src;
   const currentText = elem.querySelector('.card__title').textContent;
@@ -85,13 +94,14 @@ function openPopapImg (elem) {
   popapText.textContent = currentText;
 }
 
-function formSubmitHandler (evt) {
-    evt.preventDefault();
-
-    currentValueName.textContent = nameInput.value;
-    currentValueJob.textContent = jobInput.value;
-
-    closePopap();
+function setListenerImg (elem) {
+  elem.addEventListener('click', function (evt) {
+    const currentElement = evt.target.parentElement;
+    
+    openPopapImg(currentElement);
+    
+    openForm(popupMoreCard);
+  })
 }
 
 function renderCard (obj) {
@@ -104,16 +114,9 @@ function renderCard (obj) {
   cardImg.alt = `Фото из ${obj.name}`;
   cardTitle.textContent = obj.name;
 
+  setListenerImg(cardImg);
   likeCard(newCard);
   deleteCard(newCard);
-
-  cardImg.addEventListener('click', function (evt) {
-    const currentElement = evt.target.parentElement;
-    
-    openPopapImg(currentElement);
-    
-    openForm(popupMoreCard);
-  })
 
   cardList.prepend(newCard);
 }
