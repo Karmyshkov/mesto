@@ -118,6 +118,11 @@ function renderCard (obj) {
   cardList.prepend(newCard);
 }
 
+function clearinput () {
+  newPlace.value = '';
+  newImg.value = '';
+}
+
 function addCardHandler (evt) {
   evt.preventDefault();
 
@@ -130,8 +135,7 @@ function addCardHandler (evt) {
 
   closePopap();
 
-  newPlace.value = '';
-  newImg.value = '';
+  clearinput();
 }
 
 initialCards.map(renderCard);
