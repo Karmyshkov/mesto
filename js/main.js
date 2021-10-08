@@ -2,8 +2,8 @@ const cardTemplate = document.querySelector('.card-template');
 const cardList = document.querySelector('.places__cards');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
-const popuMoreCard = document.querySelector('.popup_type_more');
-const formElementArr = document.querySelectorAll('.popup__container');
+const popupMoreCard = document.querySelector('.popup_type_more');
+const formElements = document.querySelectorAll('.popup__container');
 const nameInput = document.getElementById('user-name');
 const jobInput = document.getElementById('user-job');
 const btnEdit = document.querySelector('.profile__edit');
@@ -74,25 +74,15 @@ function deleteCard (elem) {
   });
 }
 
-function addCardHandler (evt) {
-  evt.preventDefault();
+function openPopapImg (elem) {
+  const currentImg = elem.querySelector('.card__img').src;
+  const currentText = elem.querySelector('.card__title').textContent;
+  const popapImg = popupMoreCard.querySelector('.popup__img');
+  const popapText = popupMoreCard.querySelector('.popup__text');
 
-  const newCard = cardTemplate.content.cloneNode(true);
-
-  let cardValue = {
-    name: newPlace.value,
-    link: newImg.value
-  }
-
-  newCard.querySelector('.card__img').src = cardValue.link;
-  newCard.querySelector('.card__title').textContent = cardValue.name;
-
-  likeCard(newCard);
-  deleteCard(newCard);
-
-  cardList.prepend(newCard);
-
-  closePopap();
+  popapImg.src = currentImg;
+  popapImg.alt = `Фото из ${currentText}`;
+  popapText.textContent = currentText;
 }
 
 function formSubmitHandler (evt) {
@@ -106,45 +96,56 @@ function formSubmitHandler (evt) {
 
 function renderCard (obj) {
   const newCard = cardTemplate.content.cloneNode(true);
+  
   const cardTitle = newCard.querySelector('.card__title');
   const cardImg = newCard.querySelector('.card__img');
 
   cardImg.src = obj.link;
-  cardImg.alt = obj.name;
+  cardImg.alt = `Фото из ${obj.name}`;
   cardTitle.textContent = obj.name;
 
   likeCard(newCard);
   deleteCard(newCard);
-  
-  cardList.append(newCard);
 
   cardImg.addEventListener('click', function (evt) {
     const currentElement = evt.target.parentElement;
-    const currentImg = currentElement.querySelector('.card__img').src;
-    const currentText = currentElement.querySelector('.card__title').textContent;
-    const popapImg = popuMoreCard.querySelector('.popup__img');
-    const popapText = popuMoreCard.querySelector('.popup__text');
-
-    popapImg.src = currentImg;
-    popapImg.alt = currentText;
-    popapText.textContent = currentText;
-
-    openForm(popuMoreCard);
+    
+    openPopapImg(currentElement);
+    
+    openForm(popupMoreCard);
   })
+
+  cardList.prepend(newCard);
 }
+
+function addCardHandler (evt) {
+  evt.preventDefault();
+
+  const newCard = {
+    name: newPlace.value, 
+    link: newImg.value
+  }
+
+  renderCard(newCard);
+
+  closePopap();
+
+  newPlace.value = '';
+  newImg.value = '';
+}
+
+initialCards.map(renderCard);
 
 btnEdit.addEventListener('click', () => openForm(popupEditProfile, addInfoForm));
 btnAddCard.addEventListener('click', () => openForm(popupAddCard));
 btnCloseFormProfile.addEventListener('click', closePopap);
 btnCloseFormAddCard.addEventListener('click', closePopap);
-popuMoreCard.addEventListener('click', closePopap);
+popupMoreCard.addEventListener('click', closePopap);
 
-formElementArr.forEach(item => {
+formElements.forEach(item => {
   if (item.parentElement.classList.contains('popup_type_edit-profile')) {
     item.addEventListener('submit', formSubmitHandler);
   } else {
-    item.addEventListener('submit', addCardHandler);
+    item.addEventListener('submit', addCardHandler)
   }
 });
-
-initialCards.map(renderCard);
