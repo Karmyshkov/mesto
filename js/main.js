@@ -49,10 +49,10 @@ function addInfoForm () {
 
 function openForm (element, fnc = null) {
   element.classList.add('popup_opened');
-  if (typeof fnc !== "object") fnc();
+  if (typeof fnc !== 'object') fnc();
 }
 
-function closePopap () {
+function closePopup () {
   const activePopup = document.querySelector('.popup_opened');
   if (activePopup) activePopup.classList.remove('popup_opened');
 }
@@ -80,48 +80,52 @@ function formSubmitHandler (evt) {
     currentValueName.textContent = nameInput.value;
     currentValueJob.textContent = jobInput.value;
 
-    closePopap();
+    closePopup();
 }
 
-function openPopapImg (elem) {
+function openPopupImg (elem) {
   const currentImg = elem.querySelector('.card__img').src;
   const currentText = elem.querySelector('.card__title').textContent;
-  const popapImg = popupMoreCard.querySelector('.popup__img');
-  const popapText = popupMoreCard.querySelector('.popup__text');
+  const popupImg = popupMoreCard.querySelector('.popup__img');
+  const popupText = popupMoreCard.querySelector('.popup__text');
 
-  popapImg.src = currentImg;
-  popapImg.alt = `Фото из ${currentText}`;
-  popapText.textContent = currentText;
+  popupImg.src = currentImg;
+  popupImg.alt = `Фото из ${currentText}`;
+  popupText.textContent = currentText;
 }
 
 function setListenerImg (elem) {
   elem.addEventListener('click', function (evt) {
     const currentElement = evt.target.parentElement;
     
-    openPopapImg(currentElement);
+    openPopupImg(currentElement);
     
     openForm(popupMoreCard);
   })
 }
 
-function renderCard (obj) {
+function createCard (dataCard){
   const newCard = cardTemplate.content.cloneNode(true);
   
   const cardTitle = newCard.querySelector('.card__title');
   const cardImg = newCard.querySelector('.card__img');
 
-  cardImg.src = obj.link;
-  cardImg.alt = `Фото из ${obj.name}`;
-  cardTitle.textContent = obj.name;
+  cardImg.src = dataCard.link;
+  cardImg.alt = `Фото из ${dataCard.name}`;
+  cardTitle.textContent = dataCard.name;
 
   setListenerImg(cardImg);
   likeCard(newCard);
   deleteCard(newCard);
 
-  cardList.prepend(newCard);
+  return newCard;
 }
 
-function clearinput () {
+function renderCard (cards) {
+  cards.forEach(item => cardList.prepend(item));
+}
+
+function clearInput () {
   newPlace.value = '';
   newImg.value = '';
 }
@@ -129,25 +133,27 @@ function clearinput () {
 function addCardHandler (evt) {
   evt.preventDefault();
 
-  const newCard = {
+  const newItem = {
     name: newPlace.value, 
     link: newImg.value
   }
 
-  renderCard(newCard);
+  cardList.prepend(createCard(newItem));
 
-  closePopap();
+  closePopup();
 
-  clearinput();
+  clearInput();
 }
 
-initialCards.map(renderCard);
+const cards = initialCards.map(createCard);
+
+renderCard(cards);
 
 btnEdit.addEventListener('click', () => openForm(popupEditProfile, addInfoForm));
 btnAddCard.addEventListener('click', () => openForm(popupAddCard));
-btnCloseFormProfile.addEventListener('click', closePopap);
-btnCloseFormAddCard.addEventListener('click', closePopap);
-popupMoreCard.addEventListener('click', closePopap);
+btnCloseFormProfile.addEventListener('click', closePopup);
+btnCloseFormAddCard.addEventListener('click', closePopup);
+popupMoreCard.addEventListener('click', closePopup);
 
 formElements.forEach(item => {
   if (item.parentElement.classList.contains('popup_type_edit-profile')) {
