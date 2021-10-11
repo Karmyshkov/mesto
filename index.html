@@ -67,7 +67,9 @@
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="form-edit-profile">
           <input class="popup__field" type="text" name="user-name" id="user-name" />
+          <span id="user-name-error" class="popup__error"></span>
           <input class="popup__field" type="text" name="user-job" id="user-job" />
+          <span id="user-job-error" class="popup__error"></span>
           <button class="popup__btn" type="submit">Сохранить</button>
           <button class="popup__close" type="button" aria-label="Закрыть"></button>
         </form>
@@ -79,7 +81,9 @@
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="form-edit-profile">
           <input class="popup__field" type="text" name="new-place" id="new-place" placeholder="Название" required />
+          <span id="new-place-error" class="popup__error"></span>
           <input class="popup__field" type="url" name="new-img" id="new-img" placeholder="Ссылка на картинку" required />
+          <span id="new-img-error" class="popup__error"></span>
           <button class="popup__btn" type="submit">Сохранить</button>
           <button class="popup__close" type="button" aria-label="Закрыть"></button>
         </form>
