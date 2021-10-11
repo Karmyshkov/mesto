@@ -67,6 +67,7 @@
 @import url(../blocks/popup/__error/popup__error.css);
 @import url(../blocks/popup/__error/_invalid/popup__error_invalid.css);
 @import url(../blocks/popup/__btn/popup__btn.css);
+@import url(../blocks/popup/__btn/_disabled/popup__btn_disabled.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__inner/popup__inner.css);
 @import url(../blocks/popup/__img/popup__img.css);
