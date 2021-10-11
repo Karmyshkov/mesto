@@ -1,3 +1,54 @@
+function closeErrorMessage (errorField) {
+  errorField.classList.remove('popup__error_invalid');
+  errorField.textContent = '';
+}
+
+function showErrorMessage (errorField, inputElement) {
+  errorField.classList.add('popup__error_invalid');
+  errorField.textContent = inputElement.validationMessage;
+}
+
+function checkValidInput (elemForm, inputElement) {
+  const isValidInput = inputElement.validity.valid;
+
+  const errorField = elemForm.querySelector(`#${inputElement.id}-error`);
+  
+  if (isValidInput) {
+    closeErrorMessage(errorField, inputElement)
+  } else {
+    showErrorMessage(errorField, inputElement);
+  }
+}
+
+function setAddEventListener (elemForm) {
+  const inputElements = elemForm.querySelectorAll('.popup__field');
+
+  inputElements.forEach(inputElement => {
+    inputElement.addEventListener('blur', () => {
+      console.log(elemForm, inputElement)
+      checkValidInput(elemForm, inputElement)
+    });
+  })
+
+  elemForm.addEventListener('submit', evt => {
+    evt.preventDefault();
+
+    console.log('Дописать логику')
+  })
+}
+
+function enableValidation () {
+  const forms = document.querySelectorAll('.popup__form');
+
+  forms.forEach(elemForm => setAddEventListener(elemForm));
+}
+
+enableValidation();
+
+
+
+
+
 function addInfoForm () {
   nameInput.value  = currentValueName.textContent;
   jobInput.value = currentValueJob.textContent;
