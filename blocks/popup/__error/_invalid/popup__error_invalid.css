@@ -1,0 +1,3 @@
+.popup__error_invalid {
+  border-color: var(--color-error);
+}

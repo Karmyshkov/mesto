@@ -1,8 +1,6 @@
 .popup__field {
   border: 0;
   outline: none;
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 9px;
   font-family: inherit;
   font-size: 14px;
   color: var(--color-text-dark);
