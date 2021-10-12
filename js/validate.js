@@ -17,11 +17,15 @@ function showErrorMessage (errorField, inputElement, config) {
   errorField.textContent = inputElement.validationMessage;
 }
 
+function findErrorField (elemForm, inputElement) {
+  return elemForm.querySelector(`#${inputElement.id}-error`);
+}
+
 function checkValidInput (elemForm, inputElement, config) {
   
   const isValidInput = inputElement.validity.valid;
 
-  const errorField = elemForm.querySelector(`#${inputElement.id}-error`);
+  const errorField = findErrorField(elemForm, inputElement);
   
   if (isValidInput) {
     closeErrorMessage(errorField, config);
