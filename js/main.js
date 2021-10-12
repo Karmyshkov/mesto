@@ -16,10 +16,23 @@ function addInfoForm () {
   jobInput.value = currentValueJob.textContent;
 }
 
+function addStyleForElement (element) {
+  element.style.cursor = 'pointer';
+
+  if (element.classList.contains('popup_type_more')) {
+    const popupInner = element.querySelector('.popup__inner');
+    popupInner.style.cursor = 'default';
+  } else {
+    const popupContainer = element.querySelector('.popup__container');
+    popupContainer.style.cursor = 'default';
+  }
+}
+
 function openForm (element, fnc = null) {
   element.classList.add('popup_opened');
   if (typeof fnc !== 'object') fnc();
   closePopupByOutsideZone(element);
+  addStyleForElement(element);
 }
 
 function closePopup () {
