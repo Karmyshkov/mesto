@@ -44,15 +44,20 @@ function toggleBtnState (btn, flag) {
   }
 }
 
+function checkStateForm (elemForm) {
+  return elemForm.checkValidity();
+}
+
 function setAddEventListener (elemForm, config) {
   const inputElements = elemForm.querySelectorAll(config.inputSelector);
-  const currentBtn = elemForm.querySelector('.popup__btn');
+  const btn = elemForm.querySelector('.popup__btn');
 
   inputElements.forEach(inputElement => {
     inputElement.addEventListener('blur', () => {
-      const isStateForm = elemForm.checkValidity();
+      const isStateForm = checkStateForm(elemForm);
+
       checkValidInput(elemForm, inputElement, config);
-      toggleBtnState(currentBtn, isStateForm);
+      toggleBtnState(btn, isStateForm);
     });
   })
 
