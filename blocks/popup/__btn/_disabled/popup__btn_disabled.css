@@ -1,2 +1,5 @@
 .popup__btn_disabled {
+  background-color: transparent;
+  border: 1px solid var(--color-disabled);
+  color: var(--color-disabled);
 }

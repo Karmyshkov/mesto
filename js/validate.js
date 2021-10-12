@@ -34,19 +34,30 @@ function checkValidInput (elemForm, inputElement, config) {
   }
 }
 
+function toggleBtnState (btn, flag) {
+  if (flag) {
+    btn.classList.remove('popup__btn_disabled');
+    btn.disabled = false;
+  } else {
+    btn.classList.add('popup__btn_disabled');
+    btn.disabled = true;
+  }
+}
+
 function setAddEventListener (elemForm, config) {
   const inputElements = elemForm.querySelectorAll(config.inputSelector);
+  const currentBtn = elemForm.querySelector('.popup__btn');
 
   inputElements.forEach(inputElement => {
     inputElement.addEventListener('blur', () => {
+      const isStateForm = elemForm.checkValidity();
       checkValidInput(elemForm, inputElement, config);
+      toggleBtnState(currentBtn, isStateForm);
     });
   })
 
   elemForm.addEventListener('submit', evt => {
     evt.preventDefault();
-
-    console.log('Дописать логику')
   })
 }
 
