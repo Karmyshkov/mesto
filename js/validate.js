@@ -64,7 +64,7 @@ function setAddEventListener (elemForm, config) {
   checkForEditFormName(elemForm, btn, config);
 
   inputElements.forEach(inputElement => {
-    inputElement.addEventListener('blur', () => {
+    inputElement.addEventListener('input', () => {
       const isStateForm = checkStateForm(elemForm);
 
       checkValidInput(elemForm, inputElement, config);

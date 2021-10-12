@@ -1,3 +1,9 @@
+function closePopupByOutsideZone(elem) {
+  elem.addEventListener('click', evt => {
+    if (evt.target.parentElement.classList.contains('body')) closePopup();
+  })
+}
+
 function closePopupByESC () {
   const keyNum = window.event.keyCode;
   if (keyNum === 27) closePopup();
@@ -13,6 +19,7 @@ function addInfoForm () {
 function openForm (element, fnc = null) {
   element.classList.add('popup_opened');
   if (typeof fnc !== 'object') fnc();
+  closePopupByOutsideZone(element);
 }
 
 function closePopup () {
