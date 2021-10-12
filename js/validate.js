@@ -34,12 +34,12 @@ function checkValidInput (elemForm, inputElement, config) {
   }
 }
 
-function toggleBtnState (btn, flag) {
+function toggleBtnState (btn, flag, config) {
   if (flag) {
-    btn.classList.remove('popup__btn_disabled');
+    btn.classList.remove(config.inactiveButtonClass);
     btn.disabled = false;
   } else {
-    btn.classList.add('popup__btn_disabled');
+    btn.classList.add(config.inactiveButtonClass);
     btn.disabled = true;
   }
 }
@@ -50,14 +50,14 @@ function checkStateForm (elemForm) {
 
 function setAddEventListener (elemForm, config) {
   const inputElements = elemForm.querySelectorAll(config.inputSelector);
-  const btn = elemForm.querySelector('.popup__btn');
+  const btn = elemForm.querySelector(config.submitButtonSelector);
 
   inputElements.forEach(inputElement => {
     inputElement.addEventListener('blur', () => {
       const isStateForm = checkStateForm(elemForm);
 
       checkValidInput(elemForm, inputElement, config);
-      toggleBtnState(btn, isStateForm);
+      toggleBtnState(btn, isStateForm, config);
     });
   })
 
