@@ -1,5 +1,6 @@
 const validationConfig = {
   formSelector: '.popup__form',
+  formEditNameSelector: 'form-edit-profile',
   inputSelector: '.popup__field',
   submitButtonSelector: '.popup__btn',
   inactiveButtonClass: 'popup__btn_disabled',
@@ -34,6 +35,14 @@ function checkValidInput (elemForm, inputElement, config) {
   }
 }
 
+function checkForEditFormName (elemForm, btn, config) {
+  if (elemForm.name === config.formEditNameSelector) {
+    toggleBtnState(btn, true ,config);
+  } else {
+    toggleBtnState(btn, false ,config);
+  }
+}
+
 function toggleBtnState (btn, flag, config) {
   if (flag) {
     btn.classList.remove(config.inactiveButtonClass);
@@ -51,6 +60,8 @@ function checkStateForm (elemForm) {
 function setAddEventListener (elemForm, config) {
   const inputElements = elemForm.querySelectorAll(config.inputSelector);
   const btn = elemForm.querySelector(config.submitButtonSelector);
+
+  checkForEditFormName(elemForm, btn, config);
 
   inputElements.forEach(inputElement => {
     inputElement.addEventListener('blur', () => {
