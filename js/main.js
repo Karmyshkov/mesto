@@ -1,3 +1,10 @@
+function closePopupByESC () {
+  const keyNum = window.event.keyCode;
+  if (keyNum === 27) closePopup();
+}
+
+document.onkeydown = closePopupByESC;
+
 function addInfoForm () {
   nameInput.value  = currentValueName.textContent;
   jobInput.value = currentValueJob.textContent;
