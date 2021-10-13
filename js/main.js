@@ -19,11 +19,13 @@ function addInfoForm () {
 function openPopup (element, fnc = null) {
   element.classList.add('popup_opened');
   if (typeof fnc !== 'object') fnc();
+  document.addEventListener('keydown', closeByEscape);
 }
 
 function closePopup () {
   const activePopup = document.querySelector('.popup_opened');
   if (activePopup) activePopup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEscape); 
 }
 
 function likeCard (elem) {
@@ -128,4 +130,3 @@ popupEditProfile.addEventListener('submit', formSubmitHandler);
 popupEditProfile.addEventListener('click', closePopupByOutsideZone);
 popupAddCard.addEventListener('submit', addCardHandler)
 popupAddCard.addEventListener('click', closePopupByOutsideZone);
-document.addEventListener('keydown', closeByEscape);
