@@ -1,15 +1,15 @@
-function closePopupByOutsideZone(elem) {
-  elem.addEventListener('click', evt => {
-    if (evt.target.parentElement.classList.contains('body')) closePopup();
-  })
+function closePopupByOutsideZone(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
 }
 
-function closePopupByESC () {
+function closeByEscape () {
   const keyNum = window.event.keyCode;
   if (keyNum === 27) closePopup();
 }
 
-document.onkeydown = closePopupByESC;
 
 function addInfoForm () {
   nameInput.value  = currentValueName.textContent;
@@ -145,3 +145,5 @@ formElements.forEach(item => {
     item.addEventListener('submit', addCardHandler)
   }
 });
+
+document.addEventListener('keydown', closeByEscape);
