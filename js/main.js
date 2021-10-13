@@ -1,13 +1,13 @@
 function closePopupByOutsideZone(evt) {
+  const event = evt.target;
+  if (event.parentElement.classList.contains('body')) closePopup();
+}
+
+function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   }
-}
-
-function closeByEscape () {
-  const keyNum = window.event.keyCode;
-  if (keyNum === 27) closePopup();
 }
 
 
@@ -19,7 +19,6 @@ function addInfoForm () {
 function openPopup (element, fnc = null) {
   element.classList.add('popup_opened');
   if (typeof fnc !== 'object') fnc();
-  closePopupByOutsideZone(element);
 }
 
 function closePopup () {
@@ -123,7 +122,10 @@ btnEdit.addEventListener('click', () => openPopup(popupEditProfile, addInfoForm)
 btnAddCard.addEventListener('click', () => openPopup(popupAddCard));
 btnCloseFormProfile.addEventListener('click', closePopup);
 btnCloseFormAddCard.addEventListener('click', closePopup);
-popupMoreCard.addEventListener('click', closePopup);
+btnCloseFormMore.addEventListener('click', closePopup);
+popupMoreCard.addEventListener('click', closePopupByOutsideZone);
 popupEditProfile.addEventListener('submit', formSubmitHandler);
+popupEditProfile.addEventListener('click', closePopupByOutsideZone);
 popupAddCard.addEventListener('submit', addCardHandler)
+popupAddCard.addEventListener('click', closePopupByOutsideZone);
 document.addEventListener('keydown', closeByEscape);
