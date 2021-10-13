@@ -16,9 +16,8 @@ function addInfoForm () {
   jobInput.value = currentValueJob.textContent;
 }
 
-function openPopup (element, fnc = null) {
+function openPopup (element) {
   element.classList.add('popup_opened');
-  if (typeof fnc !== 'object') fnc();
   document.addEventListener('keydown', closeByEscape);
 }
 
@@ -120,7 +119,10 @@ const cards = initialCards.map(createCard);
 
 renderCard(cards);
 
-btnEdit.addEventListener('click', () => openPopup(popupEditProfile, addInfoForm));
+btnEdit.addEventListener('click', () => {
+  openPopup(popupEditProfile);
+  addInfoForm();
+});
 btnAddCard.addEventListener('click', () => openPopup(popupAddCard));
 btnCloseFormProfile.addEventListener('click', closePopup);
 btnCloseFormAddCard.addEventListener('click', closePopup);
