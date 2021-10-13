@@ -53,7 +53,7 @@ function formSubmitHandler (evt) {
     closePopup();
 }
 
-function createPopupImg (elem) {
+function openPopupImg (elem) {
   const currentImg = elem.querySelector('.card__img').src;
   const currentText = elem.querySelector('.card__title').textContent;
   const popupImg = popupMoreCard.querySelector('.popup__img');
@@ -62,15 +62,15 @@ function createPopupImg (elem) {
   popupImg.src = currentImg;
   popupImg.alt = `Фото из ${currentText}`;
   popupText.textContent = currentText;
+
+  openPopup(popupMoreCard);
 }
 
 function setListenerImg (elem) {
   elem.addEventListener('click', function (evt) {
     const currentElement = evt.target.parentElement;
     
-    createPopupImg(currentElement);
-    
-    openPopup(popupMoreCard);
+    openPopupImg(currentElement);
   })
 }
 
