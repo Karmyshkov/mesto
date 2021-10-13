@@ -99,15 +99,7 @@ function clearInput () {
   newImg.value = '';
 }
 
-function disabledBtn (config) {
-  const addForm = document.forms['form-add-place'];
-  const btnSubmit = addForm.querySelector('.popup__btn');
-
-  btnSubmit.classList.add(config.inactiveButtonClass);
-  btnSubmit.disabled = true;
-}
-
-function addCardHandler (evt, config) {
+function addCardHandler (evt) {
   evt.preventDefault();
 
   const newItem = {
@@ -120,8 +112,6 @@ function addCardHandler (evt, config) {
   closePopup();
 
   clearInput();
-
-  disabledBtn(config);
 }
 
 const cards = initialCards.map(createCard);
@@ -139,5 +129,10 @@ btnCloseFormMore.addEventListener('click', closePopup);
 popupMoreCard.addEventListener('click', closePopupByOutsideZone);
 popupEditProfile.addEventListener('submit', formSubmitHandler);
 popupEditProfile.addEventListener('click', closePopupByOutsideZone);
-popupAddCard.addEventListener('submit', (evt) => addCardHandler(evt, validationConfig))
+popupAddCard.addEventListener('submit', (evt) => {
+  addCardHandler(evt, validationConfig)
+  const addCardForm = document.forms['form-add-place'];
+  const btnSubmit = addCardForm.querySelector('.popup__btn');
+  toggleBtnState(btnSubmit, false, validationConfig);
+})
 popupAddCard.addEventListener('click', closePopupByOutsideZone);
