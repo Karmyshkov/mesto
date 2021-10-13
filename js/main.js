@@ -10,7 +10,6 @@ function closeByEscape(evt) {
   }
 }
 
-
 function addInfoForm () {
   nameInput.value  = currentValueName.textContent;
   jobInput.value = currentValueJob.textContent;
@@ -100,7 +99,15 @@ function clearInput () {
   newImg.value = '';
 }
 
-function addCardHandler (evt) {
+function disabledBtn (config) {
+  const addForm = document.forms['form-add-place'];
+  const btnSubmit = addForm.querySelector('.popup__btn');
+
+  btnSubmit.classList.add(config.inactiveButtonClass);
+  btnSubmit.disabled = true;
+}
+
+function addCardHandler (evt, config) {
   evt.preventDefault();
 
   const newItem = {
@@ -113,6 +120,8 @@ function addCardHandler (evt) {
   closePopup();
 
   clearInput();
+
+  disabledBtn(config);
 }
 
 const cards = initialCards.map(createCard);
@@ -130,5 +139,5 @@ btnCloseFormMore.addEventListener('click', closePopup);
 popupMoreCard.addEventListener('click', closePopupByOutsideZone);
 popupEditProfile.addEventListener('submit', formSubmitHandler);
 popupEditProfile.addEventListener('click', closePopupByOutsideZone);
-popupAddCard.addEventListener('submit', addCardHandler)
+popupAddCard.addEventListener('submit', (evt) => addCardHandler(evt, validationConfig))
 popupAddCard.addEventListener('click', closePopupByOutsideZone);
