@@ -3,7 +3,6 @@ const cardList = document.querySelector('.places__cards');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const popupAddCard = document.querySelector('.popup_type_add-card');
 const popupMoreCard = document.querySelector('.popup_type_more');
-const formElements = document.querySelectorAll('.popup__container');
 const nameInput = document.getElementById('user-name');
 const jobInput = document.getElementById('user-job');
 const btnEdit = document.querySelector('.profile__edit');

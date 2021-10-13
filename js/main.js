@@ -16,23 +16,10 @@ function addInfoForm () {
   jobInput.value = currentValueJob.textContent;
 }
 
-function addStyleForElement (element) {
-  element.style.cursor = 'pointer';
-
-  if (element.classList.contains('popup_type_more')) {
-    const popupInner = element.querySelector('.popup__inner');
-    popupInner.style.cursor = 'default';
-  } else {
-    const popupContainer = element.querySelector('.popup__container');
-    popupContainer.style.cursor = 'default';
-  }
-}
-
-function openForm (element, fnc = null) {
+function openPopup (element, fnc = null) {
   element.classList.add('popup_opened');
   if (typeof fnc !== 'object') fnc();
   closePopupByOutsideZone(element);
-  addStyleForElement(element);
 }
 
 function closePopup () {
@@ -66,7 +53,7 @@ function formSubmitHandler (evt) {
     closePopup();
 }
 
-function openPopupImg (elem) {
+function createPopupImg (elem) {
   const currentImg = elem.querySelector('.card__img').src;
   const currentText = elem.querySelector('.card__title').textContent;
   const popupImg = popupMoreCard.querySelector('.popup__img');
@@ -81,9 +68,9 @@ function setListenerImg (elem) {
   elem.addEventListener('click', function (evt) {
     const currentElement = evt.target.parentElement;
     
-    openPopupImg(currentElement);
+    createPopupImg(currentElement);
     
-    openForm(popupMoreCard);
+    openPopup(popupMoreCard);
   })
 }
 
@@ -132,18 +119,11 @@ const cards = initialCards.map(createCard);
 
 renderCard(cards);
 
-btnEdit.addEventListener('click', () => openForm(popupEditProfile, addInfoForm));
-btnAddCard.addEventListener('click', () => openForm(popupAddCard));
+btnEdit.addEventListener('click', () => openPopup(popupEditProfile, addInfoForm));
+btnAddCard.addEventListener('click', () => openPopup(popupAddCard));
 btnCloseFormProfile.addEventListener('click', closePopup);
 btnCloseFormAddCard.addEventListener('click', closePopup);
 popupMoreCard.addEventListener('click', closePopup);
-
-formElements.forEach(item => {
-  if (item.parentElement.classList.contains('popup_type_edit-profile')) {
-    item.addEventListener('submit', formSubmitHandler);
-  } else {
-    item.addEventListener('submit', addCardHandler)
-  }
-});
-
+popupEditProfile.addEventListener('submit', formSubmitHandler);
+popupAddCard.addEventListener('submit', addCardHandler)
 document.addEventListener('keydown', closeByEscape);
