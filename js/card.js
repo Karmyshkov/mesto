@@ -8,7 +8,16 @@ export class Card {
         this.template = template;
     }
 
-    _createCard () {
+    _deleteCard (elem) {
+        const btnDelete = elem.querySelector('.card__btn_type_delete');
+
+        btnDelete.addEventListener('click', function (evt) {
+          const currentElement = evt.target;
+          currentElement.parentElement.remove();
+        });
+    }
+
+    createCard () {
         const newCard = this.template.content.cloneNode(true);
         const cardTitle = newCard.querySelector('.card__title');
         const cardImg = newCard.querySelector('.card__img');
@@ -17,12 +26,14 @@ export class Card {
         cardImg.src = this.img;
         cardImg.alt = `Фото из ${this.title}`;
 
+        this._deleteCard(newCard);
+
         return newCard;
     }
 
     renderCard () {
-        const cards = this._createCard();
+        const cards = this.createCard();
         cardList.prepend(cards)
     }
-}
 
+}

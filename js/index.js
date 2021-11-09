@@ -1,3 +1,4 @@
+import {Card} from '../js/card.js';
 import {cardTemplate} from '../js/constants.js';
 
 const initialCards = [
@@ -27,7 +28,6 @@ const initialCards = [
   }
 ];
 
-import {Card} from '../js/card.js';
 
 initialCards.forEach(elem => {
   const card = new Card(elem, cardTemplate);
