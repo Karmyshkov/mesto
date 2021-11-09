@@ -1,7 +1,9 @@
-class Card {
-    constructor (img, title, template) {
-        this.img = img;
-        this.title = title;
+import {cardList} from '../js/constants.js';
+
+export class Card {
+    constructor (data, template) {
+        this.img = data.link;
+        this.title = data.name;
         this.isLike = false;
         this.template = template;
     }
@@ -17,4 +19,10 @@ class Card {
 
         return newCard;
     }
+
+    renderCard () {
+        const cards = this._createCard();
+        cardList.prepend(cards)
+    }
 }
+
