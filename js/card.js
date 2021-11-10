@@ -8,21 +8,12 @@ export class Card {
 	}
 
 	_setAddEventListener (elem) {
-		con.btnEdit.addEventListener('click', () => {
-			this._openPopup(con.popupEditProfile);
-			// addInfoForm();
-		});
-		con.btnAddCard.addEventListener('click', () => this._openPopup(con.popupAddCard));
-		con.btnCloseFormProfile.addEventListener('click', this._closePopup);
-		con.btnCloseFormAddCard.addEventListener('click', this._closePopup);
 		con.btnCloseFormMore.addEventListener('click', this._closePopup);
     elem.addEventListener('click', (evt) => {
       const currentElement = evt.target.parentElement;
       this._openPopupImg(currentElement);
     })
     con.popupMoreCard.addEventListener('click', this._closePopupByOutsideZone);
-    con.popupEditProfile.addEventListener('click', this._closePopupByOutsideZone);
-    con.popupAddCard.addEventListener('click', this._closePopupByOutsideZone);
 	}
 
   _closePopupByOutsideZone = (evt) => {
