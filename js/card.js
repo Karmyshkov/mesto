@@ -23,15 +23,22 @@ export class Card {
     })
 	}
 
+  _closeByEscape = (evt) => {
+    if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_opened');
+      this._closePopup(openedPopup);
+    }
+  }
+
 	_openPopup (elem) {
 		elem.classList.add('popup_opened');
-		//document.addEventListener('keydown', closeByEscape);
+		document.addEventListener('keydown', this._closeByEscape);
 	}
 
 	_closePopup () {
 		const activePopup = document.querySelector('.popup_opened');
 		if (activePopup) activePopup.classList.remove('popup_opened');
-		// document.removeEventListener('keydown', closeByEscape); 
+		document.removeEventListener('keydown', this._closeByEscape); 
 	}
 
 	_deleteCard (elem) {
