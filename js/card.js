@@ -21,7 +21,15 @@ export class Card {
       const currentElement = evt.target.parentElement;
       this._openPopupImg(currentElement);
     })
+    con.popupMoreCard.addEventListener('click', this._closePopupByOutsideZone);
+    con.popupEditProfile.addEventListener('click', this._closePopupByOutsideZone);
+    con.popupAddCard.addEventListener('click', this._closePopupByOutsideZone);
 	}
+
+  _closePopupByOutsideZone = (evt) => {
+    const event = evt.target;
+    if (event.parentElement.classList.contains('body')) this._closePopup();
+  }
 
   _closeByEscape = (evt) => {
     if (evt.key === 'Escape') {
