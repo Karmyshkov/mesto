@@ -1,4 +1,4 @@
-import * as constants from '../js/constants.js';
+import * as con from '../js/constants.js';
 
 export class Card {
 	constructor (data, template) {
@@ -8,15 +8,19 @@ export class Card {
 		this.template = template;
 	}
 
-	_setAddEventListener () {
-		constants.btnEdit.addEventListener('click', () => {
-			this._openPopup(constants.popupEditProfile);
+	_setAddEventListener (elem) {
+		con.btnEdit.addEventListener('click', () => {
+			this._openPopup(con.popupEditProfile);
 			// addInfoForm();
 		});
-		constants.btnAddCard.addEventListener('click', () => this._openPopup(constants.popupAddCard));
-    constants.btnCloseFormProfile.addEventListener('click', this._closePopup);
-    constants.btnCloseFormAddCard.addEventListener('click', this._closePopup);
-    constants.btnCloseFormMore.addEventListener('click', this._closePopup);
+		con.btnAddCard.addEventListener('click', () => this._openPopup(con.popupAddCard));
+		con.btnCloseFormProfile.addEventListener('click', this._closePopup);
+		con.btnCloseFormAddCard.addEventListener('click', this._closePopup);
+		con.btnCloseFormMore.addEventListener('click', this._closePopup);
+    elem.addEventListener('click', (evt) => {
+      const currentElement = evt.target.parentElement;
+      this._openPopupImg(currentElement);
+    })
 	}
 
 	_openPopup (elem) {
@@ -39,6 +43,19 @@ export class Card {
 		});
 	}
 
+  _openPopupImg (elem) {
+    const currentImg = elem.querySelector('.card__img').src;
+    const currentText = elem.querySelector('.card__title').textContent;
+    const popupImg = con.popupMoreCard.querySelector('.popup__img');
+    const popupText = con.popupMoreCard.querySelector('.popup__text');
+  
+    popupImg.src = currentImg;
+    popupImg.alt = `Фото из ${currentText}`;
+    popupText.textContent = currentText;
+  
+    this._openPopup(con.popupMoreCard);
+  }
+
 	_createCard () {
 		const newCard = this.template.content.cloneNode(true);
 		const cardTitle = newCard.querySelector('.card__title');
@@ -48,7 +65,7 @@ export class Card {
 		cardImg.src = this.img;
 		cardImg.alt = `Фото из ${this.title}`;
 		
-		this._setAddEventListener();
+		this._setAddEventListener(cardImg);
 		this._deleteCard(newCard);
 
 		return newCard;
@@ -56,6 +73,6 @@ export class Card {
 
 	renderCard () {
 		const cards = this._createCard();
-		constants.cardList.prepend(cards)
+		con.cardList.prepend(cards)
 	}
 }
