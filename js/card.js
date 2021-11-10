@@ -1,4 +1,4 @@
-import * as con from '../js/constants.js';
+import * as con from '../js/index.js';
 
 export class Card {
 	constructor (data, template) {

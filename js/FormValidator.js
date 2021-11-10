@@ -1,4 +1,4 @@
-const validationConfig = {
+export const validationConfig = {
   formSelector: '.popup__form',
   formEditNameSelector: 'form-edit-profile',
   inputSelector: '.popup__field',
