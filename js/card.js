@@ -4,7 +4,6 @@ export class Card {
 	constructor (data, template) {
 		this.img = data.link;
 		this.title = data.name;
-		this.isLike = false;
 		this.template = template;
 	}
 
@@ -71,6 +70,14 @@ export class Card {
     this._openPopup(con.popupMoreCard);
   }
 
+  _likeCard (elem) {
+    const btnLike = elem.querySelector('.card__btn_type_like');
+
+    btnLike.addEventListener('click', function () {
+      this.classList.toggle('card__btn_active');
+    });
+  }
+
 	_createCard () {
 		const newCard = this.template.content.cloneNode(true);
 		const cardTitle = newCard.querySelector('.card__title');
@@ -81,6 +88,7 @@ export class Card {
 		cardImg.alt = `Фото из ${this.title}`;
 		
 		this._setAddEventListener(cardImg);
+    this._likeCard(newCard);
 		this._deleteCard(newCard);
 
 		return newCard;
