@@ -45,9 +45,15 @@ const initialCards = [
   }
 ];
 
+const baseFunctionsForCard = {
+  openPopup,
+  closePopup,
+  closeByEscape,
+  closePopupByOutsideZone
+}
 
 initialCards.forEach(elem => {
-  const card = new Card(elem, cardTemplate);
+  const card = new Card(elem, cardTemplate, baseFunctionsForCard);
   card.renderCard();
 })
 

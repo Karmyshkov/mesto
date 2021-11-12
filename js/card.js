@@ -1,10 +1,14 @@
 import * as con from '../js/index.js';
 
 export class Card {
-	constructor (data, template) {
+	constructor (data, template, func) {
 		this.img = data.link;
 		this.title = data.name;
 		this.template = template;
+    this._openPopup = func.openPopup;
+    this._closePopup = func.closePopup;
+    this._closeByEscape = func.closeByEscape;
+    this._closePopupByOutsideZone = func.closePopupByOutsideZone;
 	}
 
 	_setAddEventListener (elem) {
@@ -14,29 +18,6 @@ export class Card {
       this._openPopupImg(currentElement);
     })
     con.popupMoreCard.addEventListener('click', this._closePopupByOutsideZone);
-	}
-
-  _closePopupByOutsideZone = (evt) => {
-    const event = evt.target;
-    if (event.parentElement.classList.contains('body')) this._closePopup();
-  }
-
-  _closeByEscape = (evt) => {
-    if (evt.key === 'Escape') {
-      const openedPopup = document.querySelector('.popup_opened');
-      this._closePopup(openedPopup);
-    }
-  }
-
-	_openPopup (elem) {
-		elem.classList.add('popup_opened');
-		document.addEventListener('keydown', this._closeByEscape);
-	}
-
-	_closePopup () {
-		const activePopup = document.querySelector('.popup_opened');
-		if (activePopup) activePopup.classList.remove('popup_opened');
-		document.removeEventListener('keydown', this._closeByEscape); 
 	}
 
 	_deleteCard (elem) {
