@@ -1,6 +1,6 @@
 import * as con from '../js/constants.js';
+import {Card} from '../js/card.js';
 import {FormValidator} from '../js/FormValidator.js';
-import {Card} from '../js/Card.js';
 
 const initialCards = [
   {
@@ -83,7 +83,7 @@ function openPopup (element) {
 function closePopup () {
   const activePopup = document.querySelector('.popup_opened');
   if (activePopup) activePopup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEscape); 
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 function formSubmitHandler (evt) {
@@ -104,7 +104,7 @@ function addCardHandler (evt) {
   evt.preventDefault();
 
   const newItem = {
-    name: con.newPlace.value, 
+    name: con.newPlace.value,
     link: con.newImg.value
   }
 
