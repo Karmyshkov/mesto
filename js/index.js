@@ -107,7 +107,7 @@ function addCardHandler (evt) {
     link: newImg.value
   }
 
-  const card = new Card(newItem, cardTemplate);
+  const card = new Card(newItem, cardTemplate, baseFunctionsForCard);
   card.renderCard();
   closePopup();
   clearInput();
