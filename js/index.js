@@ -1,5 +1,5 @@
 import {Card} from '../js/card.js';
-import {validationConfig} from '../js/FormValidator.js';
+import {FormValidator} from '../js/FormValidator.js';
 
 export const cardTemplate = document.querySelector('.card-template');
 export const cardList = document.querySelector('.places__cards');
@@ -45,6 +45,17 @@ const initialCards = [
   }
 ];
 
+export const validationConfig = {
+  formSelector: '.popup__form',
+  formEditNameSelectorEditProfile: 'form-edit-profile',
+  formEditNameSelectorAddPlace: 'form-add-place',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__btn',
+  inactiveButtonClass: 'popup__btn_disabled',
+  inputErrorClass: 'popup__error',
+  errorClass: 'popup__error_invalid'
+}
+
 const baseFunctionsForCard = {
   openPopup,
   closePopup,
@@ -55,6 +66,12 @@ const baseFunctionsForCard = {
 initialCards.forEach(elem => {
   const card = new Card(elem, cardTemplate, baseFunctionsForCard);
   card.renderCard();
+})
+
+const forms = document.querySelectorAll(validationConfig.formSelector);
+forms.forEach(elem => {
+  const formValidator = new FormValidator(validationConfig, elem);
+  formValidator.enableValidation();
 })
 
 function closePopupByOutsideZone(evt) {

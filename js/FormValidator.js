@@ -1,15 +1,4 @@
-export const validationConfig = {
-  formSelector: '.popup__form',
-  formEditNameSelectorEditProfile: 'form-edit-profile',
-  formEditNameSelectorAddPlace: 'form-add-place',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__btn',
-  inactiveButtonClass: 'popup__btn_disabled',
-  inputErrorClass: 'popup__error',
-  errorClass: 'popup__error_invalid'
-}
-
-class FormValidator {
+export class FormValidator {
   constructor (config, elemForm) {
     this.formSelector = config.formSelector;
     this.formEditNameSelectorEditProfile = config.formEditNameSelectorEditProfile;
@@ -95,9 +84,3 @@ class FormValidator {
     })
   }
 }
-
-const forms = document.querySelectorAll(validationConfig.formSelector);
-forms.forEach(elem => {
-  const formValidator = new FormValidator(validationConfig, elem);
-  formValidator.enableValidation();
-})
