@@ -1,7 +1,7 @@
 export const validationConfig = {
   formSelector: '.popup__form',
-  formEditNameSelectorEditProfile: '.form-edit-profile',
-  formEditNameSelectorAddPlace: '.form-add-place',
+  formEditNameSelectorEditProfile: 'form-edit-profile',
+  formEditNameSelectorAddPlace: 'form-add-place',
   inputSelector: '.popup__field',
   submitButtonSelector: '.popup__btn',
   inactiveButtonClass: 'popup__btn_disabled',
@@ -11,32 +11,88 @@ export const validationConfig = {
 
 class FormValidator {
   constructor (config, elemForm) {
-    this.config = config;
+    this.formSelector = config.formSelector;
+    this.formEditNameSelectorEditProfile = config.formEditNameSelectorEditProfile;
+    this.formEditNameSelectorAddPlace = config.formEditNameSelectorAddPlace;
+    this.inputSelector = config.inputSelector;
+    this.submitButtonSelector = config.submitButtonSelector;
+    this.inactiveButtonClass = config.inactiveButtonClass;
+    this.inputErrorClass = config.inputErrorClass;
+    this.errorClass = config.errorClass;
     this.elemForm = elemForm;
   }
 
-  setAddEventListener () {
-    const inputElements = this.elemForm.querySelectorAll(this.config.inputSelector);
-    const btn = this.elemForm.querySelector(this.config.submitButtonSelector);
+  _closeErrorMessage (errorField) {
+    errorField.classList.remove(this.errorClass);
+    errorField.textContent = '';
+  }
+  
+  _showErrorMessage (errorField, inputElement) {
+    errorField.classList.add(this.errorClass);
+    errorField.textContent = inputElement.validationMessage;
+  }
 
-    // checkForEditFormName(elemForm, btn, config);
+  _findErrorField (inputElement) {
+    return this.elemForm.querySelector(`#${inputElement.id}-error`);
+  }
 
+  _checkValidInput (inputElement) {
+
+    const isValidInput = inputElement.validity.valid;
+
+    const errorField = this._findErrorField(inputElement);
+
+    if (isValidInput) {
+      this._closeErrorMessage(errorField);
+    } else {
+      this._showErrorMessage(errorField, inputElement);
+    }
+  }
+
+  _checkForEditFormName (btn) {
+    if (this.elemForm.name === this.formEditNameSelectorEditProfile) {
+      this._toggleBtnState(btn, true);
+    } else {
+      this._toggleBtnState(btn, false);
+    }
+  }
+
+  _toggleBtnState (btn, flag) {
+    if (flag) {
+      btn.classList.remove(this.inactiveButtonClass);
+      btn.disabled = false;
+    } else {
+      btn.classList.add(this.inactiveButtonClass);
+      btn.disabled = true;
+    }
+  }
+
+  _checkStateForm () {
+    return this.elemForm.checkValidity();
+  }
+
+  _setAddEventListener () {
+    const inputElements = this.elemForm.querySelectorAll(this.inputSelector);
+    const btn = this.elemForm.querySelector(this.submitButtonSelector);
+  
+    this._checkForEditFormName(btn);
+  
     inputElements.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
-        // const isStateForm = checkStateForm(elemForm);
-
-        // checkValidInput(elemForm, inputElement, config);
-        // toggleBtnState(btn, isStateForm, config);
+        const isStateForm = this._checkStateForm();
+  
+        this._checkValidInput(inputElement);
+        this._toggleBtnState(btn, isStateForm);
       });
-    })
-
-    this.elemForm.addEventListener('submit', evt => {
-      evt.preventDefault();
     })
   }
 
   enableValidation () {
-    this.setAddEventListener();
+    this._setAddEventListener();
+
+    this.elemForm.addEventListener('submit', evt => {
+      evt.preventDefault();
+    })
   }
 }
 
@@ -45,80 +101,3 @@ forms.forEach(elem => {
   const formValidator = new FormValidator(validationConfig, elem);
   formValidator.enableValidation();
 })
-
-// function closeErrorMessage (errorField, config) {
-//   errorField.classList.remove(config.errorClass);
-//   errorField.textContent = '';
-// }
-
-// function showErrorMessage (errorField, inputElement, config) {
-//   errorField.classList.add(config.errorClass);
-//   errorField.textContent = inputElement.validationMessage;
-// }
-
-// function findErrorField (elemForm, inputElement) {
-//   return elemForm.querySelector(`#${inputElement.id}-error`);
-// }
-
-// function checkValidInput (elemForm, inputElement, config) {
-  
-//   const isValidInput = inputElement.validity.valid;
-
-//   const errorField = findErrorField(elemForm, inputElement);
-  
-//   if (isValidInput) {
-//     closeErrorMessage(errorField, config);
-//   } else {
-//     showErrorMessage(errorField, inputElement, config);
-//   }
-// }
-
-// function checkForEditFormName (elemForm, btn, config) {
-//   if (elemForm.name === config.formEditNameSelector) {
-//     toggleBtnState(btn, true ,config);
-//   } else {
-//     toggleBtnState(btn, false ,config);
-//   }
-// }
-
-// function toggleBtnState (btn, flag, config) {
-//   if (flag) {
-//     btn.classList.remove(config.inactiveButtonClass);
-//     btn.disabled = false;
-//   } else {
-//     btn.classList.add(config.inactiveButtonClass);
-//     btn.disabled = true;
-//   }
-// }
-
-// function checkStateForm (elemForm) {
-//   return elemForm.checkValidity();
-// }
-
-// function setAddEventListener (elemForm, config) {
-//   const inputElements = elemForm.querySelectorAll(config.inputSelector);
-//   const btn = elemForm.querySelector(config.submitButtonSelector);
-
-//   checkForEditFormName(elemForm, btn, config);
-
-//   inputElements.forEach(inputElement => {
-//     inputElement.addEventListener('input', () => {
-//       const isStateForm = checkStateForm(elemForm);
-
-//       checkValidInput(elemForm, inputElement, config);
-//       toggleBtnState(btn, isStateForm, config);
-//     });
-//   })
-
-//   elemForm.addEventListener('submit', evt => {
-//     evt.preventDefault();
-//   })
-// }
-
-// function enableValidation (config) {
-//   const forms = document.querySelectorAll(config.formSelector);
-
-//   forms.forEach(elemForm => setAddEventListener(elemForm, config));
-// }
-
-// enableValidation(validationConfig);
