@@ -1,22 +1,6 @@
-import {Card} from '../js/card.js';
+import * as con from '../js/constants.js';
 import {FormValidator} from '../js/FormValidator.js';
-
-export const cardTemplate = document.querySelector('.card-template');
-export const cardList = document.querySelector('.places__cards');
-export const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-export const popupAddCard = document.querySelector('.popup_type_add-card');
-export const popupMoreCard = document.querySelector('.popup_type_more');
-export const nameInput = document.getElementById('user-name');
-export const jobInput = document.getElementById('user-job');
-export const btnEdit = document.querySelector('.profile__edit');
-export const btnAddCard = document.querySelector('.profile__btn');
-export const btnCloseFormProfile = popupEditProfile.querySelector('.popup__close');
-export const btnCloseFormAddCard = popupAddCard.querySelector('.popup__close');
-export const btnCloseFormMore = popupMoreCard.querySelector('.popup__close');
-export const currentValueName = document.querySelector('.profile__name');
-export const currentValueJob = document.querySelector('.profile__description');
-export const newPlace = document.getElementById('new-place');
-export const newImg = document.getElementById('new-img');
+import {Card} from '../js/Card.js';
 
 const initialCards = [
   {
@@ -64,7 +48,7 @@ const baseFunctionsForCard = {
 }
 
 initialCards.forEach(elem => {
-  const card = new Card(elem, cardTemplate, baseFunctionsForCard);
+  const card = new Card(elem, con.cardTemplate, baseFunctionsForCard);
   card.renderCard();
 })
 
@@ -87,8 +71,8 @@ function closeByEscape(evt) {
 }
 
 function addInfoForm () {
-  nameInput.value  = currentValueName.textContent;
-  jobInput.value = currentValueJob.textContent;
+  con.nameInput.value  = con.currentValueName.textContent;
+  con.jobInput.value = con.currentValueJob.textContent;
 }
 
 function openPopup (element) {
@@ -105,26 +89,26 @@ function closePopup () {
 function formSubmitHandler (evt) {
     evt.preventDefault();
 
-    currentValueName.textContent = nameInput.value;
-    currentValueJob.textContent = jobInput.value;
+    con.currentValueName.textContent = con.nameInput.value;
+    con.currentValueJob.textContent = con.jobInput.value;
 
     closePopup();
 }
 
 function clearInput () {
-  newPlace.value = '';
-  newImg.value = '';
+  con.newPlace.value = '';
+  con.newImg.value = '';
 }
 
 function addCardHandler (evt) {
   evt.preventDefault();
 
   const newItem = {
-    name: newPlace.value, 
-    link: newImg.value
+    name: con.newPlace.value, 
+    link: con.newImg.value
   }
 
-  const card = new Card(newItem, cardTemplate, baseFunctionsForCard);
+  const card = new Card(newItem, con.cardTemplate, baseFunctionsForCard);
   card.renderCard();
   closePopup();
   clearInput();
@@ -140,19 +124,19 @@ function toggleBtnState (btn, flag) {
   }
 }
 
-btnEdit.addEventListener('click', () => {
-  openPopup(popupEditProfile);
+con.btnEdit.addEventListener('click', () => {
+  openPopup(con.popupEditProfile);
   addInfoForm();
 });
-btnAddCard.addEventListener('click', () => openPopup(popupAddCard));
-btnCloseFormProfile.addEventListener('click', closePopup);
-btnCloseFormAddCard.addEventListener('click', closePopup);
-popupEditProfile.addEventListener('submit', formSubmitHandler);
-popupEditProfile.addEventListener('click', closePopupByOutsideZone);
-popupAddCard.addEventListener('submit', (evt) => {
+con.btnAddCard.addEventListener('click', () => openPopup(con.popupAddCard));
+con.btnCloseFormProfile.addEventListener('click', closePopup);
+con.btnCloseFormAddCard.addEventListener('click', closePopup);
+con.popupEditProfile.addEventListener('submit', formSubmitHandler);
+con.popupEditProfile.addEventListener('click', closePopupByOutsideZone);
+con.popupAddCard.addEventListener('submit', (evt) => {
   addCardHandler(evt)
   const addCardForm = document.forms['form-add-place'];
   const btnSubmit = addCardForm.querySelector('.popup__btn');
   toggleBtnState(btnSubmit, false, validationConfig);
 })
-popupAddCard.addEventListener('click', closePopupByOutsideZone);
+con.popupAddCard.addEventListener('click', closePopupByOutsideZone);
