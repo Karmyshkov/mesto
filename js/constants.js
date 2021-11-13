@@ -16,6 +16,7 @@ export const newPlace = document.getElementById('new-place');
 export const newImg = document.getElementById('new-img');
 
 export const validationConfig = {
+  cardTemplate: '.card-template',
   formSelector: '.popup__form',
   formEditNameSelectorEditProfile: 'form-edit-profile',
   formEditNameSelectorAddPlace: 'form-add-place',

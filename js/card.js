@@ -34,11 +34,11 @@ export class Card {
     const currentText = elem.querySelector('.card__title').textContent;
     const popupImg = con.popupMoreCard.querySelector('.popup__img');
     const popupText = con.popupMoreCard.querySelector('.popup__text');
-  
+
     popupImg.src = currentImg;
     popupImg.alt = `Фото из ${currentText}`;
     popupText.textContent = currentText;
-  
+
     this._openPopup(con.popupMoreCard);
   }
 
@@ -51,14 +51,15 @@ export class Card {
   }
 
 	_createCard () {
-		const newCard = this.template.content.cloneNode(true);
+    const cardTemplate = document.querySelector(this.template);
+		const newCard = cardTemplate.content.cloneNode(true);
 		const cardTitle = newCard.querySelector('.card__title');
 		const cardImg = newCard.querySelector('.card__img');
 
 		cardTitle.textContent = this.title;
 		cardImg.src = this.img;
 		cardImg.alt = `Фото из ${this.title}`;
-		
+
 		this._setAddEventListener(cardImg);
     this._likeCard(newCard);
 		this._deleteCard(newCard);

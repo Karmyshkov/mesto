@@ -37,7 +37,7 @@ const baseFunctionsForCard = {
 }
 
 initialCards.forEach(elem => {
-  const card = new Card(elem, con.cardTemplate, baseFunctionsForCard);
+  const card = new Card(elem, con.validationConfig.cardTemplate, baseFunctionsForCard);
   card.renderCard();
 })
 
@@ -96,7 +96,7 @@ function addCardHandler (evt) {
     link: con.newImg.value
   }
 
-  const card = new Card(newItem, con.cardTemplate, baseFunctionsForCard);
+  const card = new Card(newItem, con.validationConfig.cardTemplate, baseFunctionsForCard);
   card.renderCard();
   closePopup();
   clearInput();
