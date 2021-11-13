@@ -13,13 +13,15 @@ export class Card {
     this._likeCard = func.likeCard;
 	}
 
-	_setAddEventListener (elem) {
+	_setAddEventListener (elemImg, elemCard) {
 		con.btnCloseFormMore.addEventListener('click', this._closePopup);
-    elem.addEventListener('click', (evt) => {
+    con.popupMoreCard.addEventListener('click', this._closePopupByOutsideZone);
+    elemImg.addEventListener('click', (evt) => {
       const currentElement = evt.target.parentElement;
       this._openPopupImg(currentElement);
     })
-    con.popupMoreCard.addEventListener('click', this._closePopupByOutsideZone);
+    this._likeCard(elemCard);
+		this._deleteCard(elemCard);
 	}
 
   _openPopupImg (elem) {
@@ -45,9 +47,7 @@ export class Card {
 		cardImg.src = this.img;
 		cardImg.alt = `Фото из ${this.title}`;
 
-		this._setAddEventListener(cardImg);
-    this._likeCard(newCard);
-		this._deleteCard(newCard);
+		this._setAddEventListener(cardImg, newCard);
 
 		return newCard;
 	}
