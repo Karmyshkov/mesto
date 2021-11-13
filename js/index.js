@@ -33,12 +33,15 @@ const baseFunctionsForCard = {
   openPopup,
   closePopup,
   closeByEscape,
-  closePopupByOutsideZone
+  closePopupByOutsideZone,
+  deleteCard,
+  likeCard
 }
 
 initialCards.forEach(elem => {
   const card = new Card(elem, con.validationConfig.cardTemplate, baseFunctionsForCard);
-  card.renderCard();
+  const cards = card.createCard();
+  renderCard(cards);
 })
 
 const forms = document.querySelectorAll(con.validationConfig.formSelector);
@@ -46,6 +49,27 @@ forms.forEach(elem => {
   const formValidator = new FormValidator(con.validationConfig, elem);
   formValidator.enableValidation();
 })
+
+function renderCard (cards) {
+  con.cardList.prepend(cards);
+}
+
+function likeCard (elem) {
+  const btnLike = elem.querySelector('.card__btn_type_like');
+
+  btnLike.addEventListener('click', function () {
+    this.classList.toggle('card__btn_active');
+  });
+}
+
+function deleteCard (elem) {
+  const btnDelete = elem.querySelector('.card__btn_type_delete');
+
+  btnDelete.addEventListener('click', function (evt) {
+    const currentElement = evt.target;
+    currentElement.parentElement.remove();
+  });
+}
 
 function closePopupByOutsideZone(evt) {
   const event = evt.target;
@@ -97,7 +121,8 @@ function addCardHandler (evt) {
   }
 
   const card = new Card(newItem, con.validationConfig.cardTemplate, baseFunctionsForCard);
-  card.renderCard();
+  const newCard = card.createCard();
+  renderCard(newCard);
   closePopup();
   clearInput();
 }

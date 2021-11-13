@@ -9,6 +9,8 @@ export class Card {
     this._closePopup = func.closePopup;
     this._closeByEscape = func.closeByEscape;
     this._closePopupByOutsideZone = func.closePopupByOutsideZone;
+    this._deleteCard = func.deleteCard;
+    this._likeCard = func.likeCard;
 	}
 
 	_setAddEventListener (elem) {
@@ -18,15 +20,6 @@ export class Card {
       this._openPopupImg(currentElement);
     })
     con.popupMoreCard.addEventListener('click', this._closePopupByOutsideZone);
-	}
-
-	_deleteCard (elem) {
-		const btnDelete = elem.querySelector('.card__btn_type_delete');
-
-		btnDelete.addEventListener('click', function (evt) {
-		  const currentElement = evt.target;
-		  currentElement.parentElement.remove();
-		});
 	}
 
   _openPopupImg (elem) {
@@ -42,15 +35,7 @@ export class Card {
     this._openPopup(con.popupMoreCard);
   }
 
-  _likeCard (elem) {
-    const btnLike = elem.querySelector('.card__btn_type_like');
-
-    btnLike.addEventListener('click', function () {
-      this.classList.toggle('card__btn_active');
-    });
-  }
-
-	_createCard () {
+	createCard () {
     const cardTemplate = document.querySelector(this.template);
 		const newCard = cardTemplate.content.cloneNode(true);
 		const cardTitle = newCard.querySelector('.card__title');
@@ -65,10 +50,5 @@ export class Card {
 		this._deleteCard(newCard);
 
 		return newCard;
-	}
-
-	renderCard () {
-		const cards = this._createCard();
-		con.cardList.prepend(cards)
 	}
 }
