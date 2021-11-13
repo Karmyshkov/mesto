@@ -1,5 +1,5 @@
 import * as con from '../js/constants.js';
-import {Card} from '../js/card.js';
+import {Card} from '../js/Card.js';
 import {FormValidator} from '../js/FormValidator.js';
 
 const initialCards = [

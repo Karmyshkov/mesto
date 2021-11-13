@@ -57,13 +57,7 @@ export class FormValidator {
   }
 
   toggleBtnState (btn, flag) {
-    if (flag) {
-      btn.classList.remove(this.inactiveButtonClass);
-      btn.disabled = false;
-    } else {
-      btn.classList.add(this.inactiveButtonClass);
-      btn.disabled = true;
-    }
+    this._toggleBtnState(btn, flag);
   }
 
   _checkStateForm () {
