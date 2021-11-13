@@ -37,9 +37,14 @@ export class Card {
     this._openPopup(con.popupMoreCard);
   }
 
-	createCard () {
+  _getTemplate () {
     const cardTemplate = document.querySelector(this.template);
 		const newCard = cardTemplate.content.cloneNode(true);
+    return newCard;
+  }
+
+	createCard () {
+    const newCard = this._getTemplate();
 		const cardTitle = newCard.querySelector('.card__title');
 		const cardImg = newCard.querySelector('.card__img');
 
