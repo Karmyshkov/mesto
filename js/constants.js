@@ -14,3 +14,14 @@ export const currentValueName = document.querySelector('.profile__name');
 export const currentValueJob = document.querySelector('.profile__description');
 export const newPlace = document.getElementById('new-place');
 export const newImg = document.getElementById('new-img');
+
+export const validationConfig = {
+  formSelector: '.popup__form',
+  formEditNameSelectorEditProfile: 'form-edit-profile',
+  formEditNameSelectorAddPlace: 'form-add-place',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__btn',
+  inactiveButtonClass: 'popup__btn_disabled',
+  inputErrorClass: 'popup__error',
+  errorClass: 'popup__error_invalid'
+}

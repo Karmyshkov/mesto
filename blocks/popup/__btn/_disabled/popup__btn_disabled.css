@@ -2,4 +2,5 @@
   background-color: transparent;
   border: 1px solid var(--color-disabled);
   color: var(--color-disabled);
+  cursor: default;
 }

@@ -29,17 +29,6 @@ const initialCards = [
   }
 ];
 
-export const validationConfig = {
-  formSelector: '.popup__form',
-  formEditNameSelectorEditProfile: 'form-edit-profile',
-  formEditNameSelectorAddPlace: 'form-add-place',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__btn',
-  inactiveButtonClass: 'popup__btn_disabled',
-  inputErrorClass: 'popup__error',
-  errorClass: 'popup__error_invalid'
-}
-
 const baseFunctionsForCard = {
   openPopup,
   closePopup,
@@ -52,9 +41,9 @@ initialCards.forEach(elem => {
   card.renderCard();
 })
 
-const forms = document.querySelectorAll(validationConfig.formSelector);
+const forms = document.querySelectorAll(con.validationConfig.formSelector);
 forms.forEach(elem => {
-  const formValidator = new FormValidator(validationConfig, elem);
+  const formValidator = new FormValidator(con.validationConfig, elem);
   formValidator.enableValidation();
 })
 
@@ -96,8 +85,7 @@ function formSubmitHandler (evt) {
 }
 
 function clearInput () {
-  con.newPlace.value = '';
-  con.newImg.value = '';
+  document.forms['form-add-place'].reset();
 }
 
 function addCardHandler (evt) {
@@ -137,6 +125,6 @@ con.popupAddCard.addEventListener('submit', (evt) => {
   addCardHandler(evt)
   const addCardForm = document.forms['form-add-place'];
   const btnSubmit = addCardForm.querySelector('.popup__btn');
-  toggleBtnState(btnSubmit, false, validationConfig);
+  toggleBtnState(btnSubmit, false, con.validationConfig);
 })
 con.popupAddCard.addEventListener('click', closePopupByOutsideZone);
