@@ -15,7 +15,7 @@ export class FormValidator {
     errorField.classList.remove(this.errorClass);
     errorField.textContent = '';
   }
-  
+
   _showErrorMessage (errorField, inputElement) {
     errorField.classList.add(this.errorClass);
     errorField.textContent = inputElement.validationMessage;
@@ -56,6 +56,16 @@ export class FormValidator {
     }
   }
 
+  toggleBtnState (btn, flag) {
+    if (flag) {
+      btn.classList.remove(this.inactiveButtonClass);
+      btn.disabled = false;
+    } else {
+      btn.classList.add(this.inactiveButtonClass);
+      btn.disabled = true;
+    }
+  }
+
   _checkStateForm () {
     return this.elemForm.checkValidity();
   }
@@ -63,13 +73,13 @@ export class FormValidator {
   _setAddEventListener () {
     const inputElements = this.elemForm.querySelectorAll(this.inputSelector);
     const btn = this.elemForm.querySelector(this.submitButtonSelector);
-  
+
     this._checkForEditFormName(btn);
-  
+
     inputElements.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         const isStateForm = this._checkStateForm();
-  
+
         this._checkValidInput(inputElement);
         this._toggleBtnState(btn, isStateForm);
       });

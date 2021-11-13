@@ -102,16 +102,6 @@ function addCardHandler (evt) {
   clearInput();
 }
 
-function toggleBtnState (btn, flag) {
-  if (flag) {
-    btn.classList.remove('popup__btn_disabled');
-    btn.disabled = false;
-  } else {
-    btn.classList.add('popup__btn_disabled');
-    btn.disabled = true;
-  }
-}
-
 con.btnEdit.addEventListener('click', () => {
   openPopup(con.popupEditProfile);
   addInfoForm();
@@ -125,6 +115,7 @@ con.popupAddCard.addEventListener('submit', (evt) => {
   addCardHandler(evt)
   const addCardForm = document.forms['form-add-place'];
   const btnSubmit = addCardForm.querySelector('.popup__btn');
-  toggleBtnState(btnSubmit, false, con.validationConfig);
+  const validator = new FormValidator(con.validationConfig, addCardForm);
+  validator.toggleBtnState(btnSubmit, false);
 })
 con.popupAddCard.addEventListener('click', closePopupByOutsideZone);
