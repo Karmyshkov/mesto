@@ -35,7 +35,7 @@ const baseFunctionsForCard = {
   closeByEscape,
   closePopupByOutsideZone,
   deleteCard,
-  likeCard
+  likeCard,
 }
 
 initialCards.forEach(elem => {
