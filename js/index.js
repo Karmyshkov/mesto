@@ -32,7 +32,6 @@ const initialCards = [
 const baseFunctionsForCard = {
   openPopup,
   closePopup,
-  closeByEscape,
   closePopupByOutsideZone,
   deleteCard,
   likeCard,
@@ -144,3 +143,5 @@ con.popupAddCard.addEventListener('submit', (evt) => {
   validator.toggleBtnState(btnSubmit, false);
 })
 con.popupAddCard.addEventListener('click', closePopupByOutsideZone);
+con.btnCloseFormMore.addEventListener('click', closePopup);
+con.popupMoreCard.addEventListener('click', closePopupByOutsideZone);

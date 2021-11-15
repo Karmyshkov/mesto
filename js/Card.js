@@ -7,15 +7,12 @@ export class Card {
 		this.template = template;
     this._openPopup = func.openPopup;
     this._closePopup = func.closePopup;
-    this._closeByEscape = func.closeByEscape;
     this._closePopupByOutsideZone = func.closePopupByOutsideZone;
     this._deleteCard = func.deleteCard;
     this._likeCard = func.likeCard;
 	}
 
 	_setAddEventListener (elemImg, elemCard) {
-		con.btnCloseFormMore.addEventListener('click', this._closePopup);
-    con.popupMoreCard.addEventListener('click', this._closePopupByOutsideZone);
     elemImg.addEventListener('click', (evt) => {
       const currentElement = evt.target.parentElement;
       this._openPopupImg(currentElement);
