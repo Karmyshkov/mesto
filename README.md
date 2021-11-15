@@ -25,7 +25,7 @@
 - Responsive adaptive
 - Constraint validation api
 - Pixel perfect
-- OOP
+- ООП
 
 ## Планы по доработке проекта
 

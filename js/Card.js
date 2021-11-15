@@ -7,7 +7,6 @@ export class Card {
 		this.template = template;
     this._openPopup = func.openPopup;
     this._closePopup = func.closePopup;
-    this._closePopupByOutsideZone = func.closePopupByOutsideZone;
     this._deleteCard = func.deleteCard;
     this._likeCard = func.likeCard;
 	}

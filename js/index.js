@@ -32,7 +32,6 @@ const initialCards = [
 const baseFunctionsForCard = {
   openPopup,
   closePopup,
-  closePopupByOutsideZone,
   deleteCard,
   likeCard,
 }
