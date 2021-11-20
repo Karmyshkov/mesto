@@ -1,4 +1,4 @@
-class Popup {
+export default class Popup {
   constructor (sectionPopup) {
     this.sectionPopup = sectionPopup;
   }
@@ -14,9 +14,13 @@ class Popup {
     document.removeEventListener('keydown', this.closeByEscape);
   }
 
-  closeByEscape(evt) {
+  closeByEscape (evt) {
     if (evt.key === 'Escape') {
       this.closePopup();
     }
+  }
+
+  setEventListeners () {
+
   }
 }

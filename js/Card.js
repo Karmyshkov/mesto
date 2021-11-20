@@ -1,6 +1,6 @@
 import * as con from '../js/constants.js';
 
-export class Card {
+export default class Card {
 	constructor (data, template, func) {
 		this.img = data.link;
 		this.title = data.name;
