@@ -1,6 +1,8 @@
 import * as con from '../js/constants.js';
 import Card from '../js/Card.js';
 import FormValidator from '../js/FormValidator.js';
+import PopupWithForm from '../js/PopupWithForm.js';
+import PopupWithImage from '../js/PopupWithImage.js';
 
 const initialCards = [
   {
@@ -28,6 +30,33 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+
+//PopupWithForm
+
+const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', {
+  submitHandler: () => {}
+});
+
+const popupAddCard = new PopupWithForm('.popup_type_add-card', {
+  submitHandler: () => {}
+});
+
+con.btnEdit.addEventListener('click', () => {
+  popupEditProfile.openPopup();
+  popupEditProfile.setEventListeners();
+});
+con.btnAddCard.addEventListener('click', () => {
+  popupAddCard.openPopup();
+  popupAddCard.setEventListeners();
+});
+
+
+// popupWithImage
+
+
+
+
 
 const baseFunctionsForCard = {
   openPopup,
@@ -69,32 +98,38 @@ function deleteCard (elem) {
   });
 }
 
-function closePopupByOutsideZone(evt) {
-  const event = evt.target;
-  if (event.parentElement.classList.contains('body')) closePopup();
-}
+// function closePopupByOutsideZone(evt) {
+//   const event = evt.target;
+//   if (event.parentElement.classList.contains('body')) closePopup();
+// }
 
-function closeByEscape(evt) {
-  if (evt.key === 'Escape') {
-    closePopup();
-  }
-}
+// function closeByEscape(evt) {
+//   if (evt.key === 'Escape') {
+//     closePopup();
+//   }
+// }
 
 function addInfoForm () {
   con.nameInput.value  = con.currentValueName.textContent;
   con.jobInput.value = con.currentValueJob.textContent;
 }
 
+// открытие попапа
+
 function openPopup (element) {
   element.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
 }
+
+// закрытие попапа
 
 function closePopup () {
   const activePopup = document.querySelector('.popup_opened');
   if (activePopup) activePopup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
 }
+
+// добавление текущей информации в попап редактирования пользователя
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
@@ -105,9 +140,13 @@ function formSubmitHandler (evt) {
     closePopup();
 }
 
+// очистка полей формы
+
 function clearInput () {
   document.forms['form-add-place'].reset();
 }
+
+// создание карточки
 
 function addCardHandler (evt) {
   evt.preventDefault();
@@ -124,22 +163,22 @@ function addCardHandler (evt) {
   clearInput();
 }
 
-con.btnEdit.addEventListener('click', () => {
-  openPopup(con.popupEditProfile);
-  addInfoForm();
-});
-con.btnAddCard.addEventListener('click', () => openPopup(con.popupAddCard));
-con.btnCloseFormProfile.addEventListener('click', closePopup);
-con.btnCloseFormAddCard.addEventListener('click', closePopup);
-con.popupEditProfile.addEventListener('submit', formSubmitHandler);
-con.popupEditProfile.addEventListener('click', closePopupByOutsideZone);
-con.popupAddCard.addEventListener('submit', (evt) => {
-  addCardHandler(evt)
-  const addCardForm = document.forms['form-add-place'];
-  const btnSubmit = addCardForm.querySelector('.popup__btn');
-  const validator = new FormValidator(con.validationConfig, addCardForm);
-  validator.toggleBtnState(btnSubmit, false);
-})
-con.popupAddCard.addEventListener('click', closePopupByOutsideZone);
-con.btnCloseFormMore.addEventListener('click', closePopup);
-con.popupMoreCard.addEventListener('click', closePopupByOutsideZone);
+// con.btnEdit.addEventListener('click', () => {
+//   openPopup(con.popupEditProfile);
+//   addInfoForm();
+// });
+// con.btnAddCard.addEventListener('click', () => openPopup(con.popupAddCard));
+// con.btnCloseFormProfile.addEventListener('click', closePopup);
+// con.btnCloseFormAddCard.addEventListener('click', closePopup);
+// con.popupEditProfile.addEventListener('submit', formSubmitHandler);
+// con.popupEditProfile.addEventListener('click', closePopupByOutsideZone);
+// con.popupAddCard.addEventListener('submit', (evt) => {
+//   addCardHandler(evt)
+//   const addCardForm = document.forms['form-add-place'];
+//   const btnSubmit = addCardForm.querySelector('.popup__btn');
+//   const validator = new FormValidator(con.validationConfig, addCardForm);
+//   validator.toggleBtnState(btnSubmit, false);
+// })
+// con.popupAddCard.addEventListener('click', closePopupByOutsideZone);
+// con.btnCloseFormMore.addEventListener('click', closePopup);
+// con.popupMoreCard.addEventListener('click', closePopupByOutsideZone);
