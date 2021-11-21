@@ -1,5 +1,3 @@
-import * as con from '../js/constants.js';
-
 export default class Popup {
 
   constructor (sectionPopup) {

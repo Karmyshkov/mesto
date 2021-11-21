@@ -9,9 +9,12 @@ export default class PopupWithForm extends Popup {
     this.submitFunc = submitFunc;
   }
 
+  closePopup () {
+    super.closePopup();
+    document.forms['form-add-place'].reset();
+  }
+
   _formSubmit () {
-
-
     // this.submitFunc();
     // super.closePopup();
   }
