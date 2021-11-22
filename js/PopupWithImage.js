@@ -1,22 +1,20 @@
 import Popup from '../js/Popup.js';
-import * as con from '../js/constants.js';
+import {popupMoreCard} from '../js/constants.js';
 
 export default class PopupWithImage extends Popup {
 
   constructor (sectionPopup) {
     super(sectionPopup);
-    this.img = con.popupMoreCard.querySelector('.popup__img');
-    this.text = con.popupMoreCard.querySelector('.popup__text');
+    this.img = popupMoreCard.querySelector('.popup__img');
+    this.text = popupMoreCard.querySelector('.popup__text');
   }
 
-  openPopup (elem) {
+  openPopup (data) {
+    console.log(data)
     super.openPopup();
 
-    const currentImg = elem.querySelector('.card__img').src;
-    const currentText = elem.querySelector('.card__title').textContent;
-
-    this.img.src = currentImg;
-    this.img.alt = `Фото из ${currentText}`;
-    this.text.textContent = currentText;
+    this.img.src = data.img;
+    this.img.alt = `Фото из ${data.text}`;
+    this.text.textContent = data.text;
   }
 }

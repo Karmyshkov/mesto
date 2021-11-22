@@ -1,36 +1,17 @@
-import * as con from '../js/constants.js';
-
 export default class Card {
-	constructor (data, template, func) {
+	constructor (data, template, {deleteCard, likeCard, openPopupImg}) {
 		this.img = data.link;
 		this.title = data.name;
 		this.template = template;
-    this._openPopup = func.openPopup;
-    this._closePopup = func.closePopup;
-    this._deleteCard = func.deleteCard;
-    this._likeCard = func.likeCard;
+    this._deleteCard = deleteCard;
+    this._likeCard = likeCard;
+    this._openPopupImg = openPopupImg;
 	}
 
-	_setAddEventListener (elemImg, elemCard) {
-    elemImg.addEventListener('click', (evt) => {
-      const currentElement = evt.target.parentElement;
-      this._openPopupImg(currentElement);
-    })
-    this._likeCard(elemCard);
-		this._deleteCard(elemCard);
-	}
-
-  _openPopupImg (elem) {
-    const currentImg = elem.querySelector('.card__img').src;
-    const currentText = elem.querySelector('.card__title').textContent;
-    const popupImg = con.popupMoreCard.querySelector('.popup__img');
-    const popupText = con.popupMoreCard.querySelector('.popup__text');
-
-    popupImg.src = currentImg;
-    popupImg.alt = `Фото из ${currentText}`;
-    popupText.textContent = currentText;
-
-    this._openPopup(con.popupMoreCard);
+	_setEventListener (elem) {
+    this._likeCard(elem);
+		this._deleteCard(elem);
+    elem.querySelector('.card__img').addEventListener('click', () => this._openPopupImg({img: this.img, text: this.title}));
   }
 
   _getTemplate () {
@@ -48,7 +29,7 @@ export default class Card {
 		cardImg.src = this.img;
 		cardImg.alt = `Фото из ${this.title}`;
 
-		this._setAddEventListener(cardImg, newCard);
+		this._setEventListener(newCard);
 
 		return newCard;
 	}

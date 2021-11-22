@@ -2,21 +2,22 @@ import Popup from '../js/Popup.js';
 
 export default class PopupWithForm extends Popup {
 
-  constructor (sectionPopup, {submitFunc}) {
+  constructor (sectionPopup, {submitHandler}) {
     super(sectionPopup);
-    this.sectionPopup = document.querySelector(sectionPopup);
-    this.inputs = Array.from(this.sectionPopup.querySelectorAll('.popup__field'));
-    this.submitFunc = submitFunc;
+    this.popup = document.querySelector(sectionPopup);
+    this.inputs = Array.from(this.popup.querySelectorAll('.popup__field'));
+    this.submitFunc = submitHandler;
+  }
+
+  _submitFunc (evt) {
+    evt.preventDefault();
+    this.submitFunc();
+    this.closePopup();
   }
 
   closePopup () {
     super.closePopup();
     document.forms['form-add-place'].reset();
-  }
-
-  _formSubmit () {
-    // this.submitFunc();
-    // super.closePopup();
   }
 
   _getInputValues () {
@@ -28,6 +29,6 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners () {
     super.setEventListeners();
-    this._formSubmit();
+    this.popup.addEventListener('submit', (evt) => this._submitFunc(evt));
   }
 }

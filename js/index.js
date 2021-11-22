@@ -31,15 +31,31 @@ const initialCards = [
   }
 ];
 
+const popupImage = new PopupWithImage('.popup_type_more');
+popupImage.setEventListeners();
 
-//PopupWithForm
+const openPopupImg = (data) => {
+  popupImage.openPopup(data);
+}
 
 const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', {
-  submitHandler: () => {}
+  submitHandler: () => {
+    con.currentValueName.textContent = con.nameInput.value;
+    con.currentValueJob.textContent = con.jobInput.value;
+  }
 });
 
 const popupAddCard = new PopupWithForm('.popup_type_add-card', {
-  submitHandler: () => {}
+  submitHandler: () => {
+    const newItem = {
+      name: con.newPlace.value,
+      link: con.newImg.value
+    }
+
+    const card = new Card(newItem, con.validationConfig.cardTemplate, functions);
+    const newCard = card.createCard();
+    renderCard(newCard);
+  }
 });
 
 con.btnEdit.addEventListener('click', () => {
@@ -51,22 +67,14 @@ con.btnAddCard.addEventListener('click', () => {
   popupAddCard.setEventListeners();
 });
 
-
-// popupWithImage
-
-
-
-
-
-const baseFunctionsForCard = {
-  openPopup,
-  closePopup,
+const functions = {
   deleteCard,
   likeCard,
+  openPopupImg
 }
 
 initialCards.forEach(elem => {
-  const card = new Card(elem, con.validationConfig.cardTemplate, baseFunctionsForCard);
+  const card = new Card(elem, con.validationConfig.cardTemplate, functions);
   const cards = card.createCard();
   renderCard(cards);
 })
@@ -109,59 +117,59 @@ function deleteCard (elem) {
 //   }
 // }
 
-function addInfoForm () {
-  con.nameInput.value  = con.currentValueName.textContent;
-  con.jobInput.value = con.currentValueJob.textContent;
-}
+// function addInfoForm () {
+//   con.nameInput.value  = con.currentValueName.textContent;
+//   con.jobInput.value = con.currentValueJob.textContent;
+// }
 
 // открытие попапа
 
-function openPopup (element) {
-  element.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEscape);
-}
+// function openPopup (element) {
+//   element.classList.add('popup_opened');
+//   document.addEventListener('keydown', closeByEscape);
+// }
 
 // закрытие попапа
 
-function closePopup () {
-  const activePopup = document.querySelector('.popup_opened');
-  if (activePopup) activePopup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEscape);
-}
+// function closePopup () {
+//   const activePopup = document.querySelector('.popup_opened');
+//   if (activePopup) activePopup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closeByEscape);
+// }
 
 // добавление текущей информации в попап редактирования пользователя
 
-function formSubmitHandler (evt) {
-    evt.preventDefault();
+// function formSubmitHandler (evt) {
+//     evt.preventDefault();
 
-    con.currentValueName.textContent = con.nameInput.value;
-    con.currentValueJob.textContent = con.jobInput.value;
+//     con.currentValueName.textContent = con.nameInput.value;
+//     con.currentValueJob.textContent = con.jobInput.value;
 
-    closePopup();
-}
+//     closePopup();
+// }
 
 // очистка полей формы
 
-function clearInput () {
-  document.forms['form-add-place'].reset();
-}
+// function clearInput () {
+//   document.forms['form-add-place'].reset();
+// }
 
 // создание карточки
 
-function addCardHandler (evt) {
-  evt.preventDefault();
+// function addCardHandler (evt) {
+//   evt.preventDefault();
 
-  const newItem = {
-    name: con.newPlace.value,
-    link: con.newImg.value
-  }
+//   const newItem = {
+//     name: con.newPlace.value,
+//     link: con.newImg.value
+//   }
 
-  const card = new Card(newItem, con.validationConfig.cardTemplate, baseFunctionsForCard);
-  const newCard = card.createCard();
-  renderCard(newCard);
-  closePopup();
-  clearInput();
-}
+//   const card = new Card(newItem, con.validationConfig.cardTemplate, baseFunctionsForCard);
+//   const newCard = card.createCard();
+//   renderCard(newCard);
+//   closePopup();
+//   clearInput();
+// }
 
 // con.btnEdit.addEventListener('click', () => {
 //   openPopup(con.popupEditProfile);
