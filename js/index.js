@@ -3,6 +3,7 @@ import Card from '../js/Card.js';
 import FormValidator from '../js/FormValidator.js';
 import PopupWithForm from '../js/PopupWithForm.js';
 import PopupWithImage from '../js/PopupWithImage.js';
+import UserInfo from '../js/UserInfo.js';
 
 const initialCards = [
   {
@@ -30,6 +31,8 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+const userInfo = new UserInfo();
 
 const popupImage = new PopupWithImage('.popup_type_more');
 popupImage.setEventListeners();
@@ -61,6 +64,14 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', {
 con.btnEdit.addEventListener('click', () => {
   popupEditProfile.openPopup();
   popupEditProfile.setEventListeners();
+  const newUser = {
+    name: con.currentValueName.textContent,
+    descr: con.currentValueJob.textContent
+  }
+  userInfo.setUserInfo(newUser);
+  const user = userInfo.getUserInfo();
+  con.nameInput.value  = user.name;
+  con.jobInput.value = user.descr;
 });
 con.btnAddCard.addEventListener('click', () => {
   popupAddCard.openPopup();

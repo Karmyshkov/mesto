@@ -10,7 +10,6 @@ export default class PopupWithImage extends Popup {
   }
 
   openPopup (data) {
-    console.log(data)
     super.openPopup();
 
     this.img.src = data.img;
