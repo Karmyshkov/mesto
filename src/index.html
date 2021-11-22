@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mesto</title>
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="body">
     <div class="page">
@@ -15,7 +14,7 @@
         <a href="#">
           <img
             class="header__logo"
-            src="./images/logo.svg"
+            src="<%=require('./images/logo.svg')%>"
             alt="Логотип веб-сайта Место"
           />
         </a>
@@ -32,7 +31,7 @@
           <div class="profile__wrap">
             <img
               class="profile__avatar"
-              src="./images/avatar.jpg"
+              src="<%=require('./images/avatar.jpg')%>"
               alt="Аватар пользователя"
             />
             <div class="profile__inner">
@@ -166,7 +165,5 @@
     </template>
 
     <!-- / template -->
-
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
