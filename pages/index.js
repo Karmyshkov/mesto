@@ -1,10 +1,10 @@
-import * as con from '../js/constants.js';
-import Card from '../js/Card.js';
-import FormValidator from '../js/FormValidator.js';
-import PopupWithForm from '../js/PopupWithForm.js';
-import PopupWithImage from '../js/PopupWithImage.js';
-import UserInfo from '../js/UserInfo.js';
-import Section from '../js/Section.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import Section from '../components/Section.js';
+import * as con from '../utils/constants.js';
 
 const initialCards = [
   {
@@ -61,7 +61,7 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', {
 
     const section = new Section({
       items: {},
-      renderer: (cards) => {}
+      renderer: () => {}
     },
     con.cardList
     )

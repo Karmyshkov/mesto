@@ -1,5 +1,5 @@
-import Popup from '../js/Popup.js';
-import {popupMoreCard} from '../js/constants.js';
+import Popup from '../components/Popup.js';
+import {popupMoreCard} from '../utils/constants.js';
 
 export default class PopupWithImage extends Popup {
 
