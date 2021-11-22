@@ -26,6 +26,7 @@
 - Constraint validation api
 - Pixel perfect
 - ООП
+- Webpack
 
 ## Планы по доработке проекта
 
