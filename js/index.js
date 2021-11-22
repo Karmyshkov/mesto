@@ -4,6 +4,7 @@ import FormValidator from '../js/FormValidator.js';
 import PopupWithForm from '../js/PopupWithForm.js';
 import PopupWithImage from '../js/PopupWithImage.js';
 import UserInfo from '../js/UserInfo.js';
+import Section from '../js/Section.js';
 
 const initialCards = [
   {
@@ -46,7 +47,7 @@ const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', {
     con.currentValueName.textContent = con.nameInput.value;
     con.currentValueJob.textContent = con.jobInput.value;
   }
-});
+})
 
 const popupAddCard = new PopupWithForm('.popup_type_add-card', {
   submitHandler: () => {
@@ -57,9 +58,16 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', {
 
     const card = new Card(newItem, con.validationConfig.cardTemplate, functions);
     const newCard = card.createCard();
-    renderCard(newCard);
+
+    const section = new Section({
+      items: {},
+      renderer: (cards) => {}
+    },
+    con.cardList
+    )
+    section.addItem(newCard);
   }
-});
+})
 
 con.btnEdit.addEventListener('click', () => {
   popupEditProfile.openPopup();
@@ -72,13 +80,14 @@ con.btnEdit.addEventListener('click', () => {
   const user = userInfo.getUserInfo();
   con.nameInput.value  = user.name;
   con.jobInput.value = user.descr;
-});
+})
+
 con.btnAddCard.addEventListener('click', () => {
   const validator = new FormValidator(con.validationConfig, con.addCardForm);
   validator.toggleBtnState(con.btnSubmit, false);
   popupAddCard.openPopup();
   popupAddCard.setEventListeners();
-});
+})
 
 const functions = {
   deleteCard,
@@ -89,7 +98,16 @@ const functions = {
 initialCards.forEach(elem => {
   const card = new Card(elem, con.validationConfig.cardTemplate, functions);
   const cards = card.createCard();
-  renderCard(cards);
+
+  const section = new Section({
+    items: cards,
+    renderer: (cards) => {
+      con.cardList.prepend(cards);
+    }
+  },
+  con.cardList
+  )
+  section.renderer(cards);
 })
 
 const forms = document.querySelectorAll(con.validationConfig.formSelector);
@@ -97,10 +115,6 @@ forms.forEach(elem => {
   const formValidator = new FormValidator(con.validationConfig, elem);
   formValidator.enableValidation();
 })
-
-function renderCard (cards) {
-  con.cardList.prepend(cards);
-}
 
 function likeCard (elem) {
   const btnLike = elem.querySelector('.card__btn_type_like');
