@@ -1,4 +1,5 @@
 export default class Card {
+
 	constructor (data, template, {deleteCard, likeCard, openPopupImg}) {
 		this.img = data.link;
 		this.title = data.name;

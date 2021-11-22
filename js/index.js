@@ -74,6 +74,8 @@ con.btnEdit.addEventListener('click', () => {
   con.jobInput.value = user.descr;
 });
 con.btnAddCard.addEventListener('click', () => {
+  const validator = new FormValidator(con.validationConfig, con.addCardForm);
+  validator.toggleBtnState(con.btnSubmit, false);
   popupAddCard.openPopup();
   popupAddCard.setEventListeners();
 });
@@ -116,88 +118,3 @@ function deleteCard (elem) {
     currentElement.parentElement.remove();
   });
 }
-
-// function closePopupByOutsideZone(evt) {
-//   const event = evt.target;
-//   if (event.parentElement.classList.contains('body')) closePopup();
-// }
-
-// function closeByEscape(evt) {
-//   if (evt.key === 'Escape') {
-//     closePopup();
-//   }
-// }
-
-// function addInfoForm () {
-//   con.nameInput.value  = con.currentValueName.textContent;
-//   con.jobInput.value = con.currentValueJob.textContent;
-// }
-
-// открытие попапа
-
-// function openPopup (element) {
-//   element.classList.add('popup_opened');
-//   document.addEventListener('keydown', closeByEscape);
-// }
-
-// закрытие попапа
-
-// function closePopup () {
-//   const activePopup = document.querySelector('.popup_opened');
-//   if (activePopup) activePopup.classList.remove('popup_opened');
-//   document.removeEventListener('keydown', closeByEscape);
-// }
-
-// добавление текущей информации в попап редактирования пользователя
-
-// function formSubmitHandler (evt) {
-//     evt.preventDefault();
-
-//     con.currentValueName.textContent = con.nameInput.value;
-//     con.currentValueJob.textContent = con.jobInput.value;
-
-//     closePopup();
-// }
-
-// очистка полей формы
-
-// function clearInput () {
-//   document.forms['form-add-place'].reset();
-// }
-
-// создание карточки
-
-// function addCardHandler (evt) {
-//   evt.preventDefault();
-
-//   const newItem = {
-//     name: con.newPlace.value,
-//     link: con.newImg.value
-//   }
-
-//   const card = new Card(newItem, con.validationConfig.cardTemplate, baseFunctionsForCard);
-//   const newCard = card.createCard();
-//   renderCard(newCard);
-//   closePopup();
-//   clearInput();
-// }
-
-// con.btnEdit.addEventListener('click', () => {
-//   openPopup(con.popupEditProfile);
-//   addInfoForm();
-// });
-// con.btnAddCard.addEventListener('click', () => openPopup(con.popupAddCard));
-// con.btnCloseFormProfile.addEventListener('click', closePopup);
-// con.btnCloseFormAddCard.addEventListener('click', closePopup);
-// con.popupEditProfile.addEventListener('submit', formSubmitHandler);
-// con.popupEditProfile.addEventListener('click', closePopupByOutsideZone);
-// con.popupAddCard.addEventListener('submit', (evt) => {
-//   addCardHandler(evt)
-//   const addCardForm = document.forms['form-add-place'];
-//   const btnSubmit = addCardForm.querySelector('.popup__btn');
-//   const validator = new FormValidator(con.validationConfig, addCardForm);
-//   validator.toggleBtnState(btnSubmit, false);
-// })
-// con.popupAddCard.addEventListener('click', closePopupByOutsideZone);
-// con.btnCloseFormMore.addEventListener('click', closePopup);
-// con.popupMoreCard.addEventListener('click', closePopupByOutsideZone);

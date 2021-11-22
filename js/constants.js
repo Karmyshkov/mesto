@@ -14,6 +14,8 @@ export const currentValueName = document.querySelector('.profile__name');
 export const currentValueJob = document.querySelector('.profile__description');
 export const newPlace = document.getElementById('new-place');
 export const newImg = document.getElementById('new-img');
+export const addCardForm = document.forms['form-add-place'];
+export const btnSubmit = addCardForm.querySelector('.popup__btn');
 
 export const validationConfig = {
   cardTemplate: '.card-template',
