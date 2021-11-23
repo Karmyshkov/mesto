@@ -15,6 +15,7 @@ export const currentValueJob = document.querySelector('.profile__description');
 export const newPlace = document.getElementById('new-place');
 export const newImg = document.getElementById('new-img');
 export const addCardForm = document.forms['form-add-place'];
+export const profileCardForm = document.forms['form-edit-profile'];
 export const btnSubmit = addCardForm.querySelector('.popup__btn');
 
 export const validationConfig = {

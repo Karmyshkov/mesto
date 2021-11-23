@@ -1,11 +1,9 @@
 export default class Card {
 
-	constructor (data, template, {deleteCard, likeCard, openPopupImg}) {
+	constructor (data, template, openPopupImg) {
 		this.img = data.link;
 		this.title = data.name;
 		this.template = template;
-    this._deleteCard = deleteCard;
-    this._likeCard = likeCard;
     this._openPopupImg = openPopupImg;
 	}
 
@@ -19,6 +17,23 @@ export default class Card {
     const cardTemplate = document.querySelector(this.template);
 		const newCard = cardTemplate.content.cloneNode(true);
     return newCard;
+  }
+
+  _deleteCard (elem) {
+    const btnDelete = elem.querySelector('.card__btn_type_delete');
+
+    btnDelete.addEventListener('click', function (evt) {
+      const currentElement = evt.target;
+      currentElement.parentElement.remove();
+    });
+  }
+
+  _likeCard (elem) {
+    const btnLike = elem.querySelector('.card__btn_type_like');
+
+    btnLike.addEventListener('click', function () {
+      this.classList.toggle('card__btn_active');
+    });
   }
 
 	createCard () {

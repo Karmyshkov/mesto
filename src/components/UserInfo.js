@@ -1,20 +1,25 @@
 export default class UserInfo {
 
-  constructor () {
-    this.name = null;
-    this.descr = null;
+  constructor (nameSelector, descrSelector) {
+    this.name = document.querySelector(nameSelector);
+    this.descr = document.querySelector(descrSelector);
+    this.form = document.forms['form-edit-profile'];
+    this.inputName = this.form.elements['user-name'];
+    this.inputDescr = this.form.elements['user-job'];
   }
 
   getUserInfo () {
     const user = {
-      name: this.name,
-      descr: this.descr
+      name: this.name.textContent,
+      descr: this.descr.textContent
     }
     return user;
   }
 
-  setUserInfo (data) {
-    this.name = data.name;
-    this.descr = data.descr;
+  setUserInfo () {
+    const user = this.getUserInfo();
+
+    this.inputName.value = user.name;
+    this.inputDescr.value = user.descr;
   }
 }

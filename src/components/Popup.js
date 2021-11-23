@@ -3,6 +3,8 @@ export default class Popup {
   constructor (sectionPopup) {
     this.popup = document.querySelector(sectionPopup);
     this.btnClose = this.popup.querySelector('.popup__close');
+    this._handleEscClose = this._handleEscClose.bind(this);
+    this.closePopup = this.closePopup.bind(this);
   }
 
   openPopup () {
@@ -11,8 +13,8 @@ export default class Popup {
   }
 
   closePopup () {
-    const activePopup = document.querySelector('.popup_opened');
-    if (activePopup) activePopup.classList.remove('popup_opened');
+    this.popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 
   _handleEscClose (evt) {

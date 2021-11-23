@@ -11,7 +11,7 @@ export default class PopupWithForm extends Popup {
 
   _submitFunc (evt) {
     evt.preventDefault();
-    this.submitFunc();
+    this.submitFunc(this._getInputValues());
     this.closePopup();
   }
 
@@ -25,6 +25,7 @@ export default class PopupWithForm extends Popup {
     this.inputs.forEach(input => {
       dataForm[input.name] = input.value;
     });
+    return dataForm;
   }
 
   setEventListeners () {

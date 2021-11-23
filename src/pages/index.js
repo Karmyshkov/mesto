@@ -35,7 +35,12 @@ const initialCards = [
   }
 ];
 
-const userInfo = new UserInfo();
+const addFormValidator = new FormValidator(con.validationConfig, con.addCardForm);
+addFormValidator.enableValidation();
+const profileFormValidator = new FormValidator(con.validationConfig, con.profileCardForm);
+profileFormValidator.enableValidation();
+
+const userInfo = new UserInfo('.profile__name', '.profile__description');
 
 const popupImage = new PopupWithImage('.popup_type_more');
 popupImage.setEventListeners();
@@ -45,92 +50,48 @@ const openPopupImg = (data) => {
 }
 
 const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', {
-  submitHandler: () => {
-    con.currentValueName.textContent = con.nameInput.value;
-    con.currentValueJob.textContent = con.jobInput.value;
+  submitHandler: (user) => {
+    con.currentValueName.textContent = user['user-name'];
+    con.currentValueJob.textContent = user['user-job'];
   }
 })
+
+const createCard = (newItem) => {
+  const card = new Card(newItem, con.validationConfig.cardTemplate, openPopupImg);
+  return card.createCard();
+}
+
+const section = new Section({items: {}, renderer: () => {}}, con.cardList);
 
 const popupAddCard = new PopupWithForm('.popup_type_add-card', {
-  submitHandler: () => {
+  submitHandler: (data) => {
     const newItem = {
-      name: con.newPlace.value,
-      link: con.newImg.value
+      name: data['new-place'],
+      link: data['new-img']
     }
 
-    const card = new Card(newItem, con.validationConfig.cardTemplate, functions);
-    const newCard = card.createCard();
+    const card = createCard(newItem);
 
-    const section = new Section({
-      items: {},
-      renderer: () => {}
-    },
-    con.cardList
-    )
-    section.addItem(newCard);
+    section.addItem(card);
   }
 })
+popupAddCard.setEventListeners();
 
 con.btnEdit.addEventListener('click', () => {
   popupEditProfile.openPopup();
   popupEditProfile.setEventListeners();
-  const newUser = {
-    name: con.currentValueName.textContent,
-    descr: con.currentValueJob.textContent
-  }
-  userInfo.setUserInfo(newUser);
-  const user = userInfo.getUserInfo();
-  con.nameInput.value  = user.name;
-  con.jobInput.value = user.descr;
+  userInfo.setUserInfo();
 })
 
 con.btnAddCard.addEventListener('click', () => {
-  const validator = new FormValidator(con.validationConfig, con.addCardForm);
-  validator.toggleBtnState(con.btnSubmit, false);
+  addFormValidator.toggleBtnState(con.btnSubmit, false);
   popupAddCard.openPopup();
-  popupAddCard.setEventListeners();
 })
-
-const functions = {
-  deleteCard,
-  likeCard,
-  openPopupImg
-}
 
 initialCards.forEach(elem => {
-  const card = new Card(elem, con.validationConfig.cardTemplate, functions);
+  const card = new Card(elem, con.validationConfig.cardTemplate, openPopupImg);
   const cards = card.createCard();
 
-  const section = new Section({
-    items: cards,
-    renderer: (cards) => {
-      con.cardList.prepend(cards);
-    }
-  },
-  con.cardList
-  )
-  section.renderer(cards);
+  const section = new Section({items: cards, renderer: () => {}}, con.cardList);
+  section.addItem(cards);
 })
-
-const forms = document.querySelectorAll(con.validationConfig.formSelector);
-forms.forEach(elem => {
-  const formValidator = new FormValidator(con.validationConfig, elem);
-  formValidator.enableValidation();
-})
-
-function likeCard (elem) {
-  const btnLike = elem.querySelector('.card__btn_type_like');
-
-  btnLike.addEventListener('click', function () {
-    this.classList.toggle('card__btn_active');
-  });
-}
-
-function deleteCard (elem) {
-  const btnDelete = elem.querySelector('.card__btn_type_delete');
-
-  btnDelete.addEventListener('click', function (evt) {
-    const currentElement = evt.target;
-    currentElement.parentElement.remove();
-  });
-}

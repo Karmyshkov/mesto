@@ -10,6 +10,8 @@ export default class FormValidator {
     this.inputErrorClass = config.inputErrorClass;
     this.errorClass = config.errorClass;
     this.elemForm = elemForm;
+    this.inputs = this.elemForm.querySelectorAll(this.inputSelector);
+    this.btn = this.elemForm.querySelector(this.submitButtonSelector);
   }
 
   _closeErrorMessage (errorField) {
@@ -66,17 +68,14 @@ export default class FormValidator {
   }
 
   _setAddEventListener () {
-    const inputElements = this.elemForm.querySelectorAll(this.inputSelector);
-    const btn = this.elemForm.querySelector(this.submitButtonSelector);
+    this._checkForEditFormName(this.btn);
 
-    this._checkForEditFormName(btn);
-
-    inputElements.forEach(inputElement => {
+    this.inputs.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         const isStateForm = this._checkStateForm();
 
         this._checkValidInput(inputElement);
-        this._toggleBtnState(btn, isStateForm);
+        this._toggleBtnState(this.btn, isStateForm);
       });
     })
   }
