@@ -51,8 +51,7 @@ const openPopupImg = (data) => {
 
 const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', {
   submitHandler: (user) => {
-    con.currentValueName.textContent = user['user-name'];
-    con.currentValueJob.textContent = user['user-job'];
+    userInfo.setUserInfo(user);
   }
 })
 
@@ -80,7 +79,9 @@ popupAddCard.setEventListeners();
 con.btnEdit.addEventListener('click', () => {
   popupEditProfile.openPopup();
   popupEditProfile.setEventListeners();
-  userInfo.setUserInfo();
+  const user = userInfo.getUserInfo();
+  con.nameInput.value = user.name;
+  con.jobInput.value = user.descr;
 })
 
 con.btnAddCard.addEventListener('click', () => {

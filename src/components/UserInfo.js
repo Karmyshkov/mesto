@@ -3,9 +3,6 @@ export default class UserInfo {
   constructor (nameSelector, descrSelector) {
     this.name = document.querySelector(nameSelector);
     this.descr = document.querySelector(descrSelector);
-    this.form = document.forms['form-edit-profile'];
-    this.inputName = this.form.elements['user-name'];
-    this.inputDescr = this.form.elements['user-job'];
   }
 
   getUserInfo () {
@@ -16,10 +13,8 @@ export default class UserInfo {
     return user;
   }
 
-  setUserInfo () {
-    const user = this.getUserInfo();
-
-    this.inputName.value = user.name;
-    this.inputDescr.value = user.descr;
+  setUserInfo (data) {
+    this.name.textContent = data['user-name'];
+    this.descr.textContent = data['user-job'];
   }
 }
