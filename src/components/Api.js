@@ -5,13 +5,20 @@ export default class Api {
     this.headers = headers;
   }
 
+  _checkStatus(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  }
+
   getInitialCards() {
     return fetch(`${this.url}/cards`, {
       headers: {
         authorization: this.headers.authorization
       }
     })
-    .then(dataUser => dataUser.json());
+    .then(dataCards => this._checkStatus(dataCards));
   }
 
   addNewCard({name, link}) {
@@ -26,7 +33,7 @@ export default class Api {
         link
       })
     })
-    .then(dataUser => dataUser.json());
+    .then(dataCard => this._checkStatus(dataCard));
   }
 
   getUserInfo() {
@@ -35,7 +42,7 @@ export default class Api {
         authorization: this.headers.authorization
       }
     })
-    .then(dataUser => dataUser.json());
+    .then(dataUser => this._checkStatus(dataUser))
   }
 
   changeUserInfo({name, about}) {
@@ -50,6 +57,6 @@ export default class Api {
         about
       })
     })
-    .then(dataUser => dataUser.json());
+    .then(dataUser => this._checkStatus(dataUser))
   }
 }
