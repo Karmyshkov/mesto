@@ -1,7 +1,7 @@
 import './index.css';
 
+import Api from '../components/Api.js';
 import Card from '../components/Card.js';
-
 import FormValidator from '../components/FormValidator.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -36,6 +36,26 @@ const initialCards = [
   }
 ];
 
+const api = new Api({
+  url: 'https://mesto.nomoreparties.co/v1/cohort-30',
+  headers: {
+    authorization: '8c883974-19a7-405e-97be-4a70edef35b8',
+    'Content-Type': 'application/json'
+  }
+});
+
+// api.getUserInfo()
+//   .then(data => console.log(data))
+
+// api.getInitialCards()
+//   .then(data => console.log(data))
+
+// api.changeUserInfo({name: 'test', about: 'lorem'})
+//   .then(data => console.log(data))
+
+// api.addNewCard({name: 'test', link: 'https://avatars.mds.yandex.net/get-zen_doc/3429702/pub_5eb5dbf2ce86a8785f6dd6c7_5eb5df1ec7c480495abf8c77/scale_1200'})
+//   .then(data => console.log(data))
+
 const openPopupImg = (data) => {
   popupImage.openPopup(data);
 }
@@ -58,7 +78,22 @@ addFormValidator.enableValidation();
 const profileFormValidator = new FormValidator(con.validationConfig, con.profileCardForm);
 profileFormValidator.enableValidation();
 
-const userInfo = new UserInfo('.profile__name', '.profile__description');
+const userInfo = new UserInfo('.profile__name', '.profile__description', '.profile__avatar');
+
+// const setUserInfo = () => {
+//   fetch('https://mesto.nomoreparties.co/v1/cohort-30/users/me', {
+//   headers: {
+//     authorization: '8c883974-19a7-405e-97be-4a70edef35b8'
+//   }
+// })
+//   .then(res => res.json())
+//   .then(res => {
+//     console.log(res)
+//     userInfo.setUserInfo(res);
+//   });
+// }
+
+// setUserInfo();
 
 const popupImage = new PopupWithImage('.popup_type_more');
 popupImage.setEventListeners();

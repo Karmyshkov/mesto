@@ -1,6 +1,6 @@
 export default class FormValidator {
 
-  constructor (config, elemForm) {
+  constructor(config, elemForm) {
     this.formSelector = config.formSelector;
     this.formEditNameSelectorEditProfile = config.formEditNameSelectorEditProfile;
     this.formEditNameSelectorAddPlace = config.formEditNameSelectorAddPlace;
@@ -14,21 +14,21 @@ export default class FormValidator {
     this.btn = this.elemForm.querySelector(this.submitButtonSelector);
   }
 
-  _closeErrorMessage (errorField) {
+  _closeErrorMessage(errorField) {
     errorField.classList.remove(this.errorClass);
     errorField.textContent = '';
   }
 
-  _showErrorMessage (errorField, inputElement) {
+  _showErrorMessage(errorField, inputElement) {
     errorField.classList.add(this.errorClass);
     errorField.textContent = inputElement.validationMessage;
   }
 
-  _findErrorField (inputElement) {
+  _findErrorField(inputElement) {
     return this.elemForm.querySelector(`#${inputElement.id}-error`);
   }
 
-  _checkValidInput (inputElement) {
+  _checkValidInput(inputElement) {
 
     const isValidInput = inputElement.validity.valid;
 
@@ -41,7 +41,7 @@ export default class FormValidator {
     }
   }
 
-  _checkForEditFormName (btn) {
+  _checkForEditFormName(btn) {
     if (this.elemForm.name === this.formEditNameSelectorEditProfile) {
       this._toggleBtnState(btn, true);
     } else {
@@ -49,7 +49,7 @@ export default class FormValidator {
     }
   }
 
-  _toggleBtnState (btn, flag) {
+  _toggleBtnState(btn, flag) {
     if (flag) {
       btn.classList.remove(this.inactiveButtonClass);
       btn.disabled = false;
@@ -59,15 +59,15 @@ export default class FormValidator {
     }
   }
 
-  toggleBtnState (btn, flag) {
+  toggleBtnState(btn, flag) {
     this._toggleBtnState(btn, flag);
   }
 
-  _checkStateForm () {
+  _checkStateForm() {
     return this.elemForm.checkValidity();
   }
 
-  _setAddEventListener () {
+  _setAddEventListener() {
     this._checkForEditFormName(this.btn);
 
     this.inputs.forEach(inputElement => {
@@ -80,7 +80,7 @@ export default class FormValidator {
     })
   }
 
-  enableValidation () {
+  enableValidation() {
     this._setAddEventListener();
 
     this.elemForm.addEventListener('submit', evt => {
