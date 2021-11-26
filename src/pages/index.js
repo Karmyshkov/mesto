@@ -52,10 +52,6 @@ Promise.all([
   cards.forEach(card => section.renderer(card));
 })
 
-
-// api.changeUserInfo({name: 'test', about: 'lorem'})
-//   .then(data => console.log(data))
-
 // api.addNewCard({name: 'test', link: 'https://avatars.mds.yandex.net/get-zen_doc/3429702/pub_5eb5dbf2ce86a8785f6dd6c7_5eb5df1ec7c480495abf8c77/scale_1200'})
 //   .then(data => console.log(data))
 
@@ -87,7 +83,8 @@ popupImage.setEventListeners();
 
 const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', {
   submitHandler: (user) => {
-    userInfo.setUserInfo(user);
+    api.changeUserInfo({name: user['user-name'], about: user['user-job']})
+      .then(user => userInfo.setUserInfo(user))
   }
 })
 popupEditProfile.setEventListeners();
