@@ -49,6 +49,7 @@ Promise.all([
   api.getInitialCards()
 ]).then(([user, cards]) => {
   userInfo.setUserInfo(user);
+  cards.forEach(card => section.renderer(card));
 })
 
 
@@ -67,13 +68,12 @@ function createCard (newItem) {
   return card.createCard();
 }
 
-const section = new Section({items: initialCards,
+const section = new Section({
   renderer: (item) => {
     const card = createCard(item);
     section.addItem(card);
   }
 }, con.cardList);
-section.renderer();
 
 const addFormValidator = new FormValidator(con.validationConfig, con.addCardForm);
 addFormValidator.enableValidation();
