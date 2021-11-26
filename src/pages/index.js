@@ -44,11 +44,13 @@ const api = new Api({
   }
 });
 
-// api.getUserInfo()
-//   .then(data => console.log(data))
+Promise.all([
+  api.getUserInfo(),
+  api.getInitialCards()
+]).then(([user, cards]) => {
+  userInfo.setUserInfo(user);
+})
 
-// api.getInitialCards()
-//   .then(data => console.log(data))
 
 // api.changeUserInfo({name: 'test', about: 'lorem'})
 //   .then(data => console.log(data))
@@ -60,7 +62,7 @@ const openPopupImg = (data) => {
   popupImage.openPopup(data);
 }
 
-const createCard = (newItem) => {
+function createCard (newItem) {
   const card = new Card(newItem, con.validationConfig.cardTemplate, openPopupImg);
   return card.createCard();
 }
@@ -79,21 +81,6 @@ const profileFormValidator = new FormValidator(con.validationConfig, con.profile
 profileFormValidator.enableValidation();
 
 const userInfo = new UserInfo('.profile__name', '.profile__description', '.profile__avatar');
-
-// const setUserInfo = () => {
-//   fetch('https://mesto.nomoreparties.co/v1/cohort-30/users/me', {
-//   headers: {
-//     authorization: '8c883974-19a7-405e-97be-4a70edef35b8'
-//   }
-// })
-//   .then(res => res.json())
-//   .then(res => {
-//     console.log(res)
-//     userInfo.setUserInfo(res);
-//   });
-// }
-
-// setUserInfo();
 
 const popupImage = new PopupWithImage('.popup_type_more');
 popupImage.setEventListeners();
