@@ -52,9 +52,6 @@ Promise.all([
   cards.forEach(card => section.renderer(card));
 })
 
-// api.addNewCard({name: 'test', link: 'https://avatars.mds.yandex.net/get-zen_doc/3429702/pub_5eb5dbf2ce86a8785f6dd6c7_5eb5df1ec7c480495abf8c77/scale_1200'})
-//   .then(data => console.log(data))
-
 const openPopupImg = (data) => {
   popupImage.openPopup(data);
 }
@@ -91,6 +88,8 @@ popupEditProfile.setEventListeners();
 
 const popupAddCard = new PopupWithForm('.popup_type_add-card', {
   submitHandler: (data) => {
+    api.addNewCard({name: data['new-place'], link: data['new-img']})
+
     const newItem = {
       name: data['new-place'],
       link: data['new-img']

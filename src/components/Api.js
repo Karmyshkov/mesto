@@ -52,5 +52,4 @@ export default class Api {
     })
     .then(dataUser => dataUser.json());
   }
-
 }
