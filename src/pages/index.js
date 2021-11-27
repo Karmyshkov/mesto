@@ -33,7 +33,7 @@ const openPopupImg = (data) => {
 function createCard (newItem) {
   const user = userInfo.getUserInfo();
   const card = new Card({
-    btnLikeHandler: (cardId) => {
+    btnDeleteHandler: (cardId) => {
       api.deleteCard(cardId)
         .catch(error => console.log(error))
     },
@@ -73,16 +73,11 @@ popupEditProfile.setEventListeners();
 const popupAddCard = new PopupWithForm('.popup_type_add-card', {
   submitHandler: (data) => {
     api.addNewCard({name: data['new-place'], link: data['new-img']})
+      .then(dataCard => {
+        const card = createCard(dataCard);
+        section.addItem(card);
+      })
       .catch(error => console.log(error))
-
-    const newItem = {
-      name: data['new-place'],
-      link: data['new-img']
-    }
-
-    const card = createCard(newItem);
-
-    section.addItem(card);
   }
 })
 popupAddCard.setEventListeners();

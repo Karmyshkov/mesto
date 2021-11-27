@@ -1,6 +1,7 @@
 export default class Card {
 
-	constructor({btnLikeHandler, data, userId}, template, openPopupImg) {
+	constructor({btnDeleteHandler, data, userId}, template, openPopupImg) {
+    console.log(data.owner._id)
 		this.img = data.link;
 		this.title = data.name;
     this.countLikes = data.likes.length;
@@ -9,7 +10,7 @@ export default class Card {
     this.ownerId = data.owner._id;
 		this._template = template;
     this._openPopupImg = openPopupImg;
-    this._btnLikeHandler = btnLikeHandler;
+    this._btnDeleteHandler = btnDeleteHandler;
 	}
 
 	_setEventListener(elem) {
@@ -17,7 +18,7 @@ export default class Card {
 		this._deleteCard(elem);
     this._addDeleteBtn(elem);
     elem.querySelector('.card__img').addEventListener('click', () => this._openPopupImg({img: this.img, text: this.title}));
-    elem.querySelector('.card__btn_type_delete').addEventListener('click', () => this._btnLikeHandler(this.cardId));
+    elem.querySelector('.card__btn_type_delete').addEventListener('click', () => this._btnDeleteHandler(this.cardId));
   }
 
   _getTemplate() {
@@ -49,6 +50,10 @@ export default class Card {
     }
   }
 
+  _isNullCountLikes() {
+    return this.countLikes === null ? 0 : 1;
+  }
+
 	createCard() {
     const newCard = this._getTemplate();
 		const cardTitle = newCard.querySelector('.card__title');
@@ -58,7 +63,8 @@ export default class Card {
 		cardTitle.textContent = this.title;
 		cardImg.src = this.img;
 		cardImg.alt = `Фото из ${this.title}`;
-    countLikes.textContent = this.countLikes;
+
+    if (this._isNullCountLikes()) countLikes.textContent = this.countLikes;
 
 		this._setEventListener(newCard);
 
