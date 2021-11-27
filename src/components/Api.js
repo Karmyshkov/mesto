@@ -36,6 +36,13 @@ export default class Api {
     .then(dataCard => this._checkStatus(dataCard));
   }
 
+  deleteCard(cardId) {
+    return fetch(`${this.url}/cards/${cardId}`, {
+      method: 'DELETE',
+    })
+    .then(dataCard => this._checkStatus(dataCard));
+  }
+
   getUserInfo() {
     return fetch(`${this.url}/users/me`, {
       headers: {

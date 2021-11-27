@@ -31,7 +31,8 @@ const openPopupImg = (data) => {
 }
 
 function createCard (newItem) {
-  const card = new Card(newItem, con.validationConfig.cardTemplate, openPopupImg);
+  const user = userInfo.getUserInfo();
+  const card = new Card({data: newItem, userId: user.id}, con.validationConfig.cardTemplate, openPopupImg);
   return card.createCard();
 }
 

@@ -1,22 +1,25 @@
 export default class Card {
 
-	constructor(data, template, openPopupImg) {
+	constructor({data, userId}, template, openPopupImg) {
 		this.img = data.link;
 		this.title = data.name;
-    this.countLikes = Object.keys(data.likes).length;
-    this.id = data._id;
-		this.template = template;
+    this.countLikes = data.likes.length;
+    this.cardId = data._id;
+    this.userId = userId;
+    this.ownerId = data.owner._id;
+		this._template = template;
     this._openPopupImg = openPopupImg;
 	}
 
 	_setEventListener(elem) {
     this._likeCard(elem);
 		this._deleteCard(elem);
+    this._addDeleteBtn(elem);
     elem.querySelector('.card__img').addEventListener('click', () => this._openPopupImg({img: this.img, text: this.title}));
   }
 
   _getTemplate() {
-    const cardTemplate = document.querySelector(this.template);
+    const cardTemplate = document.querySelector(this._template);
 		const newCard = cardTemplate.content.cloneNode(true);
     return newCard;
   }
@@ -36,6 +39,12 @@ export default class Card {
     btnLike.addEventListener('click', function () {
       this.classList.toggle('card__btn_active');
     });
+  }
+
+  _addDeleteBtn(elem) {
+    if (this.userId === this.ownerId) {
+      elem.querySelector('.card__btn_type_delete').classList.add('card__btn_state_active');
+    }
   }
 
 	createCard() {
