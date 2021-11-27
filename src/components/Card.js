@@ -1,6 +1,6 @@
 export default class Card {
 
-	constructor({data, userId}, template, openPopupImg) {
+	constructor({btnLikeHandler, data, userId}, template, openPopupImg) {
 		this.img = data.link;
 		this.title = data.name;
     this.countLikes = data.likes.length;
@@ -9,6 +9,7 @@ export default class Card {
     this.ownerId = data.owner._id;
 		this._template = template;
     this._openPopupImg = openPopupImg;
+    this._btnLikeHandler = btnLikeHandler;
 	}
 
 	_setEventListener(elem) {
@@ -16,6 +17,7 @@ export default class Card {
 		this._deleteCard(elem);
     this._addDeleteBtn(elem);
     elem.querySelector('.card__img').addEventListener('click', () => this._openPopupImg({img: this.img, text: this.title}));
+    elem.querySelector('.card__btn_type_delete').addEventListener('click', () => this._btnLikeHandler(this.cardId));
   }
 
   _getTemplate() {

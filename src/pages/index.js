@@ -32,7 +32,13 @@ const openPopupImg = (data) => {
 
 function createCard (newItem) {
   const user = userInfo.getUserInfo();
-  const card = new Card({data: newItem, userId: user.id}, con.validationConfig.cardTemplate, openPopupImg);
+  const card = new Card({
+    btnLikeHandler: (cardId) => {
+      api.deleteCard(cardId)
+        .catch(error => console.log(error))
+    },
+    data: newItem, userId: user.id
+  }, con.validationConfig.cardTemplate, openPopupImg);
   return card.createCard();
 }
 
