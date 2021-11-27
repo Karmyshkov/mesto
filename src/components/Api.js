@@ -59,4 +59,16 @@ export default class Api {
     })
     .then(dataUser => this._checkStatus(dataUser))
   }
+
+  changeUserAvatar(avatar) {
+    return fetch(`${this.url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: {
+        authorization: this.headers.authorization,
+        "Content-Type": this.headers['Content-Type'],
+      },
+      body: JSON.stringify(avatar)
+    })
+    .then(dataUser => this._checkStatus(dataUser))
+  }
 }

@@ -9,33 +9,6 @@ import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
 import * as con from '../utils/constants.js';
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-30',
   headers: {
@@ -49,6 +22,7 @@ Promise.all([
   api.getInitialCards()
 ]).then(([user, cards]) => {
   userInfo.setUserInfo(user);
+  userInfo.setAvatar(user);
   cards.forEach(card => section.renderer(card));
 })
 
@@ -72,6 +46,8 @@ const addFormValidator = new FormValidator(con.validationConfig, con.addCardForm
 addFormValidator.enableValidation();
 const profileFormValidator = new FormValidator(con.validationConfig, con.profileCardForm);
 profileFormValidator.enableValidation();
+const editAvatarFormValidator = new FormValidator(con.validationConfig, con.editAvatarForm);
+editAvatarFormValidator.enableValidation();
 
 const userInfo = new UserInfo('.profile__name', '.profile__description', '.profile__avatar');
 
@@ -102,6 +78,14 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', {
 })
 popupAddCard.setEventListeners();
 
+const popupEditAvatar = new PopupWithForm('.popup_type_edit-avatar', {
+  submitHandler: (urlImg) => {
+    api.changeUserAvatar(urlImg)
+      .catch(error => console.log(error))
+  }
+})
+popupEditAvatar.setEventListeners();
+
 con.btnEdit.addEventListener('click', () => {
   popupEditProfile.openPopup();
   const user = userInfo.getUserInfo();
@@ -114,3 +98,6 @@ con.btnAddCard.addEventListener('click', () => {
   popupAddCard.openPopup();
 })
 
+con.btnEditAvatar.addEventListener('click', () => {
+  popupEditAvatar.openPopup();
+})

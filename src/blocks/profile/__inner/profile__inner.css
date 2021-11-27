@@ -1,4 +1,11 @@
 .profile__inner {
+  margin-left: 30px;
+}
+
+@media profile__inner and (max-width: 760px) {
+  .profile__avatar {
+    margin-left: 0;
+  }
 }
 
 @media screen and (max-width: 500px) {
