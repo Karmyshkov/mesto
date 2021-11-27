@@ -21,7 +21,6 @@ Promise.all([
   api.getUserInfo(),
   api.getInitialCards()
 ]).then(([user, cards]) => {
-  console.log(cards)
   userInfo.setUserInfo(user);
   userInfo.setAvatar(user);
   cards.forEach(card => section.renderer(card));

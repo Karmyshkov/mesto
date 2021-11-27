@@ -4,6 +4,7 @@ export default class Card {
 		this.img = data.link;
 		this.title = data.name;
     this.countLikes = Object.keys(data.likes).length;
+    this.id = data._id;
 		this.template = template;
     this._openPopupImg = openPopupImg;
 	}
