@@ -3,6 +3,7 @@ export default class Card {
 	constructor(data, template, openPopupImg) {
 		this.img = data.link;
 		this.title = data.name;
+    this.countLikes = Object.keys(data.likes).length;
 		this.template = template;
     this._openPopupImg = openPopupImg;
 	}
@@ -40,10 +41,12 @@ export default class Card {
     const newCard = this._getTemplate();
 		const cardTitle = newCard.querySelector('.card__title');
 		const cardImg = newCard.querySelector('.card__img');
+    const countLikes = newCard.querySelector('.card__count');
 
 		cardTitle.textContent = this.title;
 		cardImg.src = this.img;
 		cardImg.alt = `Фото из ${this.title}`;
+    countLikes.textContent = this.countLikes;
 
 		this._setEventListener(newCard);
 

@@ -21,6 +21,7 @@ Promise.all([
   api.getUserInfo(),
   api.getInitialCards()
 ]).then(([user, cards]) => {
+  console.log(cards)
   userInfo.setUserInfo(user);
   userInfo.setAvatar(user);
   cards.forEach(card => section.renderer(card));
@@ -58,6 +59,7 @@ const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', {
   submitHandler: (user) => {
     api.changeUserInfo({name: user['user-name'], about: user['user-job']})
       .then(user => userInfo.setUserInfo(user))
+      .catch(error => console.log(error))
   }
 })
 popupEditProfile.setEventListeners();
@@ -65,6 +67,7 @@ popupEditProfile.setEventListeners();
 const popupAddCard = new PopupWithForm('.popup_type_add-card', {
   submitHandler: (data) => {
     api.addNewCard({name: data['new-place'], link: data['new-img']})
+      .catch(error => console.log(error))
 
     const newItem = {
       name: data['new-place'],
