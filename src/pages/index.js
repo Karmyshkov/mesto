@@ -3,6 +3,7 @@ import './index.css';
 import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
+import Popup from '../components/Popup.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupConfirm from '../components/PopupConfirm.js';
@@ -69,7 +70,11 @@ popupImage.setEventListeners();
 const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', {
   submitHandler: (user) => {
     api.changeUserInfo({name: user['user-name'], about: user['user-job']})
-      .then(user => userInfo.setUserInfo(user))
+      .then(user => {
+        userInfo.setUserInfo(user)
+        const popup = document.querySelector('.popup_type_edit-profile');
+        Popup.closePopup(popup);
+      })
       .catch(error => console.log(error))
   }
 })
