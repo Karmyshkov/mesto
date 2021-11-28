@@ -19,12 +19,16 @@ export default class Card {
     this._deleteLikeHandler = deleteLikeHandler;
   }
 
+  static deleteCard(btnDelete) {
+    btnDelete.closest('.card').remove();
+  }
+
 	_setEventListener() {
     this._setLikeCard();
     this._addDeleteBtn();
     this.element.querySelector('.card__img').addEventListener('click', () => this._openPopupImg({img: this.img, text: this.title}));
     this.btnLike.addEventListener('click',  () => this._toggleLikeBtn());
-    this.btnDelete.addEventListener('click', () => this._getInfoCard({id: this.cardId, card: this.btnDelete}));
+    this.btnDelete.addEventListener('click', () => this._getInfoCard({id: this.cardId, btnDelete: this.btnDelete}));
   }
 
   _getTemplate() {
@@ -39,10 +43,6 @@ export default class Card {
       const currentElement = evt.target;
       currentElement.parentElement.remove();
     });
-  }
-
-  static deleteCard(btnDelete) {
-    btnDelete.closest('.card').remove();
   }
 
   _setLikeCard() {

@@ -106,7 +106,7 @@ const popupDeleteCard = new PopupConfirm('.popup_type_delete-card', {
       .then(cardData => {
         console.log(cardData);
         popupDeleteCard.closePopup();
-        Card.deleteCard(currentCard.card)
+        Card.deleteCard(currentCard.btnDelete)
       })
       .catch(error => console.log(error))
   }
