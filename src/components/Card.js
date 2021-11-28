@@ -5,6 +5,7 @@ export default class Card {
     this.element = null;
     this.btnLike = null;
     this.btnDelete = null;
+    this.countLikesText = null;
     this.img = data.link;
 		this.title = data.name;
     this.countLikes = data.likes.length;
@@ -23,7 +24,11 @@ export default class Card {
 		this._deleteCard();
     this._addDeleteBtn();
     this.element.querySelector('.card__img').addEventListener('click', () => this._openPopupImg({img: this.img, text: this.title}));
-    this.btnDelete.addEventListener('click', () => this._btnDeleteCardHandler(this.cardId));
+    this.btnDelete.addEventListener('click', () => {
+      this._btnDeleteCardHandler(this.cardId)
+        .then(dataCard => console.log(dataCard))
+        .catch(error => console.log(`Error: ${error}`))
+    });
     this.btnLike.addEventListener('click',  () => this._toggleLikeBtn());
   }
 
@@ -49,8 +54,20 @@ export default class Card {
   _toggleLikeBtn() {
     if (!this.btnLike.classList.contains('card__btn_active')) {
       this._addLikeHandler(this.cardId)
+        .then(dataLikes => {
+          this.likes = dataLikes.likes;
+          this.btnLike.classList.add('card__btn_active');
+          this.countLikesText.textContent = dataLikes.likes.length;
+        })
+        .catch(error => console.log(`Error: ${error}`))
     } else {
       this._deleteLikeHandler(this.cardId)
+        .then(dataLikes => {
+          this.likes = dataLikes.likes;
+          this.btnLike.classList.remove('card__btn_active');
+          this.countLikesText.textContent = dataLikes.likes.length;
+        })
+        .catch(error => console.log(`Error: ${error}`))
     }
   }
 
@@ -66,6 +83,7 @@ export default class Card {
     this.element = newCard;
     this.btnLike = newCard.querySelector('.card__btn_type_like');
     this.btnDelete = newCard.querySelector('.card__btn_type_delete');
+    this.countLikesText = newCard.querySelector('.card__count');
 
 		const cardTitle = newCard.querySelector('.card__title');
 		const cardImg = newCard.querySelector('.card__img');

@@ -33,19 +33,9 @@ const openPopupImg = (data) => {
 function createCard (newItem) {
   const user = userInfo.getUserInfo();
   const card = new Card({
-    btnDeleteCardHandler: (cardId) => {
-      api.deleteCard(cardId)
-        .catch(error => console.log(error))
-    },
-    addLikeHandler: (cardId) => {
-      api.addLikeCard(cardId)
-        .then(cardData => console.log(cardData))
-        .catch(error => console.log(error))
-    },
-    deleteLikeHandler: (cardId) => {
-      api.deleteLikeCard(cardId)
-        .catch(error => console.log(error))
-    },
+    btnDeleteCardHandler: (cardId) => api.deleteCard(cardId),
+    addLikeHandler: (cardId) => api.addLikeCard(cardId),
+    deleteLikeHandler: (cardId) => api.deleteLikeCard(cardId),
     data: newItem, userId: user.id
   }, con.validationConfig.cardTemplate, openPopupImg);
   return card.createCard();
