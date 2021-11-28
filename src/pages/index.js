@@ -5,6 +5,7 @@ import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
+import PopupConfirm from '../components/PopupConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
 import * as con from '../utils/constants.js';
@@ -31,10 +32,12 @@ const openPopupImg = (data) => {
   popupImage.openPopup(data);
 }
 
+let currentCard = null;
+
 function createCard (newItem) {
   const user = userInfo.getUserInfo();
   const card = new Card({
-    btnDeleteCardHandler: (cardId) => api.deleteCard(cardId),
+    getInfoCard: (dataCard) => currentCard = dataCard,
     addLikeHandler: (cardId) => api.addLikeCard(cardId),
     deleteLikeHandler: (cardId) => api.deleteLikeCard(cardId),
     data: newItem, userId: user.id
@@ -45,6 +48,8 @@ function createCard (newItem) {
 const section = new Section({
   renderer: (item) => {
     const card = createCard(item);
+    const btnDelete = card.querySelector('.card__btn_type_delete');
+    btnDelete.addEventListener('click', () => popupDeleteCard.openPopup());
     section.addItem(card);
   }
 }, con.cardList);
@@ -95,6 +100,19 @@ const popupEditAvatar = new PopupWithForm('.popup_type_edit-avatar', {
 })
 popupEditAvatar.setEventListeners();
 
+const popupDeleteCard = new PopupConfirm('.popup_type_delete-card', {
+  submitHandler: () => {
+    api.deleteCard(currentCard.id)
+      .then(cardData => {
+        console.log(cardData);
+        popupDeleteCard.closePopup();
+        Card.deleteCard(currentCard.card)
+      })
+      .catch(error => console.log(error))
+  }
+})
+popupDeleteCard.setEventListeners();
+
 con.btnEdit.addEventListener('click', () => {
   popupEditProfile.openPopup();
   const user = userInfo.getUserInfo();
@@ -107,6 +125,4 @@ con.btnAddCard.addEventListener('click', () => {
   popupAddCard.openPopup();
 })
 
-con.btnEditAvatar.addEventListener('click', () => {
-  popupEditAvatar.openPopup();
-})
+con.btnEditAvatar.addEventListener('click', () => popupEditAvatar.openPopup());

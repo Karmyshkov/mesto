@@ -1,6 +1,6 @@
 export default class Card {
 
-	constructor({btnDeleteCardHandler, addLikeHandler, deleteLikeHandler, data, userId}, template, openPopupImg) {
+	constructor({getInfoCard, addLikeHandler, deleteLikeHandler, data, userId}, template, openPopupImg) {
 		this._template = template;
     this.element = null;
     this.btnLike = null;
@@ -14,22 +14,17 @@ export default class Card {
     this.userId = userId;
     this.ownerId = data.owner._id;
     this._openPopupImg = openPopupImg;
-    this._btnDeleteCardHandler = btnDeleteCardHandler;
+    this._getInfoCard = getInfoCard;
     this._addLikeHandler = addLikeHandler;
     this._deleteLikeHandler = deleteLikeHandler;
-	}
+  }
 
 	_setEventListener() {
     this._setLikeCard();
-		this._deleteCard();
     this._addDeleteBtn();
     this.element.querySelector('.card__img').addEventListener('click', () => this._openPopupImg({img: this.img, text: this.title}));
-    this.btnDelete.addEventListener('click', () => {
-      this._btnDeleteCardHandler(this.cardId)
-        .then(dataCard => console.log(dataCard))
-        .catch(error => console.log(`Error: ${error}`))
-    });
     this.btnLike.addEventListener('click',  () => this._toggleLikeBtn());
+    this.btnDelete.addEventListener('click', () => this._getInfoCard({id: this.cardId, card: this.btnDelete}));
   }
 
   _getTemplate() {
@@ -40,9 +35,14 @@ export default class Card {
 
   _deleteCard() {
     this.btnDelete.addEventListener('click', function (evt) {
+      console.log('asd')
       const currentElement = evt.target;
       currentElement.parentElement.remove();
     });
+  }
+
+  static deleteCard(btnDelete) {
+    btnDelete.closest('.card').remove();
   }
 
   _setLikeCard() {
