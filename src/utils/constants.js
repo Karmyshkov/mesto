@@ -18,7 +18,8 @@ export const newImg = document.getElementById('new-img');
 export const addCardForm = document.forms['form-add-place'];
 export const profileCardForm = document.forms['form-edit-profile'];
 export const editAvatarForm = document.forms['form-new-avatar'];
-export const btnSubmit = addCardForm.querySelector('.popup__btn');
+export const btnSubmitAddForm = addCardForm.querySelector('.popup__btn');
+export const btnSubmitEditAvatar = editAvatarForm.querySelector('.popup__btn');
 export const btnEditAvatar = document.querySelector('.profile__btn-avatar');
 export const avatarImg = document.querySelector('.profile__avatar');
 

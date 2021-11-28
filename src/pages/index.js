@@ -121,8 +121,11 @@ con.btnEdit.addEventListener('click', () => {
 })
 
 con.btnAddCard.addEventListener('click', () => {
-  addFormValidator.toggleBtnState(con.btnSubmit, false);
+  addFormValidator.toggleBtnState(con.btnSubmitAddForm, false);
   popupAddCard.openPopup();
 })
 
-con.btnEditAvatar.addEventListener('click', () => popupEditAvatar.openPopup());
+con.btnEditAvatar.addEventListener('click', () => {
+  editAvatarFormValidator.toggleBtnState(con.btnSubmitEditAvatar, false);
+  popupEditAvatar.openPopup()
+});
