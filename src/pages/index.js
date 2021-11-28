@@ -33,8 +33,17 @@ const openPopupImg = (data) => {
 function createCard (newItem) {
   const user = userInfo.getUserInfo();
   const card = new Card({
-    btnDeleteHandler: (cardId) => {
+    btnDeleteCardHandler: (cardId) => {
       api.deleteCard(cardId)
+        .catch(error => console.log(error))
+    },
+    addLikeHandler: (cardId) => {
+      api.addLikeCard(cardId)
+        .then(cardData => console.log(cardData))
+        .catch(error => console.log(error))
+    },
+    deleteLikeHandler: (cardId) => {
+      api.deleteLikeCard(cardId)
         .catch(error => console.log(error))
     },
     data: newItem, userId: user.id
