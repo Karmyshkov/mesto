@@ -86,8 +86,11 @@ popupAddCard.setEventListeners();
 
 const popupEditAvatar = new PopupWithForm('.popup_type_edit-avatar', {
   submitHandler: (urlImg) => {
+    loader(true, '.popup_type_edit-avatar');
     api.changeUserAvatar(urlImg)
+      .then(avatarData => userInfo.setAvatar({avatar: avatarData.avatar}))
       .catch(error => console.log(error))
+      .finally(() => loader(false, '.popup_type_edit-avatar'));
   }
 })
 popupEditAvatar.setEventListeners();
