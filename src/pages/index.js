@@ -8,6 +8,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import Section from '../components/Section.js';
 import * as con from '../utils/constants.js';
+import {loader} from '../utils/loader.js';
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-30',
@@ -71,12 +72,14 @@ popupEditProfile.setEventListeners();
 
 const popupAddCard = new PopupWithForm('.popup_type_add-card', {
   submitHandler: (data) => {
+    loader(true, '.popup_type_add-card');
     api.addNewCard({name: data['new-place'], link: data['new-img']})
       .then(dataCard => {
         const card = createCard(dataCard);
         section.addItem(card);
       })
       .catch(error => console.log(error))
+      .finally(() => loader(false, '.popup_type_add-card'));
   }
 })
 popupAddCard.setEventListeners();
