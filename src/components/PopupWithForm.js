@@ -9,14 +9,14 @@ export default class PopupWithForm extends Popup {
     this.submitFunc = submitHandler;
   }
 
+  static closePopup(popup, nameForm) {
+    super.closePopup(popup);
+    document.forms[nameForm].reset();
+  }
+
   _submitFunc(evt) {
     evt.preventDefault();
     this.submitFunc(this._getInputValues());
-  }
-
-  closePopup() {
-    super.closePopup();
-    document.forms['form-add-place'].reset();
   }
 
   _getInputValues() {

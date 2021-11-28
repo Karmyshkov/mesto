@@ -1,12 +1,13 @@
-import Popup from '../components/Popup.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
 export const loader = (isLoader, popupSection) => {
     const popup = document.querySelector(popupSection);
+    const formName = popup.querySelector('.popup__form').name;
     const btn = popup.querySelector('.popup__btn');
   if (isLoader) {
     btn.textContent = 'Сохранение...';
   } else {
     btn.textContent = 'Сохраненить';
-    Popup.closePopup(popup);
+    PopupWithForm.closePopup(popup, formName);
   }
 }
