@@ -65,8 +65,6 @@ function createCard (newItem) {
 const section = new Section({
   renderer: (item) => {
     const card = createCard(item);
-    const btnDelete = card.querySelector('.card__btn_type_delete');
-    btnDelete.addEventListener('click', () => popupDeleteCard.openPopup());
     section.addItem(card);
   }
 }, con.cardList);
@@ -83,19 +81,21 @@ const userInfo = new UserInfo('.profile__name', '.profile__description', '.profi
 const popupImage = new PopupWithImage('.popup_type_more');
 popupImage.setEventListeners();
 
-const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', {
+const popupEditProfile = new PopupWithForm('.popup_type_edit-profile', 'form-edit-profile', {
   submitHandler: (user) => {
+    loader(true, '.popup_type_edit-profile');
     api.changeUserInfo({name: user['user-name'], about: user['user-job']})
       .then(user => {
         userInfo.setUserInfo(user)
         popupEditProfile.closePopup();
       })
       .catch(error => console.log(error))
+      .finally(() => loader(false, '.popup_type_edit-profile'));
   }
 })
 popupEditProfile.setEventListeners();
 
-const popupAddCard = new PopupWithForm('.popup_type_add-card', {
+const popupAddCard = new PopupWithForm('.popup_type_add-card', 'form-add-place', {
   submitHandler: (data) => {
     loader(true, '.popup_type_add-card');
     api.addNewCard({name: data['new-place'], link: data['new-img']})
@@ -110,7 +110,7 @@ const popupAddCard = new PopupWithForm('.popup_type_add-card', {
 })
 popupAddCard.setEventListeners();
 
-const popupEditAvatar = new PopupWithForm('.popup_type_edit-avatar', {
+const popupEditAvatar = new PopupWithForm('.popup_type_edit-avatar', 'form-new-avatar', {
   submitHandler: (urlImg) => {
     loader(true, '.popup_type_edit-avatar');
     api.changeUserAvatar(urlImg)
@@ -128,6 +128,8 @@ const popupDeleteCard = new PopupConfirm('.popup_type_delete-card');
 popupDeleteCard.setEventListeners();
 
 con.btnEdit.addEventListener('click', () => {
+  profileFormValidator.toggleBtnState(false);
+  profileFormValidator.resetValidation();
   popupEditProfile.openPopup();
   const user = userInfo.getUserInfo();
   con.nameInput.value = user.name;
@@ -135,11 +137,13 @@ con.btnEdit.addEventListener('click', () => {
 })
 
 con.btnAddCard.addEventListener('click', () => {
-  addFormValidator.toggleBtnState(con.btnSubmitAddForm, false);
+  addFormValidator.toggleBtnState(false);
+  addFormValidator.resetValidation();
   popupAddCard.openPopup();
 })
 
 con.btnEditAvatar.addEventListener('click', () => {
-  editAvatarFormValidator.toggleBtnState(con.btnSubmitEditAvatar, false);
-  popupEditAvatar.openPopup()
+  editAvatarFormValidator.toggleBtnState(false);
+  editAvatarFormValidator.resetValidation();
+  popupEditAvatar.openPopup();
 });

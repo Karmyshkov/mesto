@@ -17,10 +17,11 @@ export default class UserInfo {
     return user;
   }
 
-  setUserInfo({_id ,name, about}) {
+  setUserInfo({_id ,name, about, avatar}) {
     this.id = _id;
     this.name.textContent = name;
     this.descr.textContent = about;
+    this.avatar.src = avatar;
   }
 
   setAvatar({avatar}) {

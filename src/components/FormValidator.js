@@ -1,35 +1,34 @@
 export default class FormValidator {
 
   constructor(config, elemForm) {
-    this.formSelector = config.formSelector;
-    this.formEditNameSelectorEditProfile = config.formEditNameSelectorEditProfile;
-    this.formEditNameSelectorAddPlace = config.formEditNameSelectorAddPlace;
-    this.inputSelector = config.inputSelector;
-    this.submitButtonSelector = config.submitButtonSelector;
-    this.inactiveButtonClass = config.inactiveButtonClass;
-    this.inputErrorClass = config.inputErrorClass;
-    this.errorClass = config.errorClass;
-    this.elemForm = elemForm;
-    this.inputs = this.elemForm.querySelectorAll(this.inputSelector);
-    this.btn = this.elemForm.querySelector(this.submitButtonSelector);
+    this._formSelector = config.formSelector;
+    this._formEditNameSelectorEditProfile = config.formEditNameSelectorEditProfile;
+    this._formEditNameSelectorAddPlace = config.formEditNameSelectorAddPlace;
+    this._inputSelector = config.inputSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
+    this._inactiveButtonClass = config.inactiveButtonClass;
+    this._inputErrorClass = config.inputErrorClass;
+    this._errorClass = config.errorClass;
+    this._elemForm = elemForm;
+    this._inputs = this._elemForm.querySelectorAll(this._inputSelector);
+    this._btn = this._elemForm.querySelector(this._submitButtonSelector);
   }
 
   _closeErrorMessage(errorField) {
-    errorField.classList.remove(this.errorClass);
+    errorField.classList.remove(this._errorClass);
     errorField.textContent = '';
   }
 
   _showErrorMessage(errorField, inputElement) {
-    errorField.classList.add(this.errorClass);
+    errorField.classList.add(this._errorClass);
     errorField.textContent = inputElement.validationMessage;
   }
 
   _findErrorField(inputElement) {
-    return this.elemForm.querySelector(`#${inputElement.id}-error`);
+    return this._elemForm.querySelector(`#${inputElement.id}-error`);
   }
 
   _checkValidInput(inputElement) {
-
     const isValidInput = inputElement.validity.valid;
 
     const errorField = this._findErrorField(inputElement);
@@ -41,41 +40,40 @@ export default class FormValidator {
     }
   }
 
-  _checkForEditFormName(btn) {
-    if (this.elemForm.name === this.formEditNameSelectorEditProfile) {
-      this._toggleBtnState(btn, true);
-    } else {
-      this._toggleBtnState(btn, false);
-    }
-  }
-
-  _toggleBtnState(btn, flag) {
+  _toggleBtnState(flag) {
     if (flag) {
-      btn.classList.remove(this.inactiveButtonClass);
-      btn.disabled = false;
+      this._btn.classList.remove(this._inactiveButtonClass);
+      this._btn.disabled = false;
     } else {
-      btn.classList.add(this.inactiveButtonClass);
-      btn.disabled = true;
+      this._btn.classList.add(this._inactiveButtonClass);
+      this._btn.disabled = true;
     }
   }
 
-  toggleBtnState(btn, flag) {
-    this._toggleBtnState(btn, flag);
+  toggleBtnState(flag) {
+    this._toggleBtnState(flag);
   }
 
   _checkStateForm() {
-    return this.elemForm.checkValidity();
+    return this._elemForm.checkValidity();
+  }
+
+  resetValidation() {
+    this._inputs.forEach(input => {
+      const errorField = this._findErrorField(input);
+      this._closeErrorMessage(errorField);
+    });
   }
 
   _setAddEventListener() {
-    this._checkForEditFormName(this.btn);
+    this._toggleBtnState(false);
 
-    this.inputs.forEach(inputElement => {
+    this._inputs.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         const isStateForm = this._checkStateForm();
 
         this._checkValidInput(inputElement);
-        this._toggleBtnState(this.btn, isStateForm);
+        this._toggleBtnState(isStateForm);
       });
     })
   }
@@ -83,7 +81,7 @@ export default class FormValidator {
   enableValidation() {
     this._setAddEventListener();
 
-    this.elemForm.addEventListener('submit', evt => {
+    this._elemForm.addEventListener('submit', evt => {
       evt.preventDefault();
     })
   }

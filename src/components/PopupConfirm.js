@@ -4,7 +4,6 @@ export default class PopupConfirm extends Popup {
 
   constructor(sectionPopup) {
     super(sectionPopup);
-    this.popup = document.querySelector(sectionPopup);
   }
 
   setActionHandler(action) {

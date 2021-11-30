@@ -24,8 +24,7 @@ export default class Popup {
   }
 
   _closePopupByOutsideZone(evt) {
-    const event = evt.target;
-    if (event.parentElement.classList.contains('body')) this.closePopup();
+    if (evt.target.classList.contains('popup_opened')) this.closePopup();
   }
 
   setEventListeners() {
