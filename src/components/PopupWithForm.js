@@ -9,9 +9,9 @@ export default class PopupWithForm extends Popup {
     this.submitFunc = submitHandler;
   }
 
-  static closePopup(popup, nameForm) {
-    super.closePopup(popup);
-    document.forms[nameForm].reset();
+  closePopup() {
+    super.closePopup();
+    document.forms['form-add-place'].reset();
   }
 
   _submitFunc(evt) {
