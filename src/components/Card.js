@@ -21,7 +21,6 @@ export default class Card {
   }
 
 	_setEventListener() {
-    this._deleteCard();
     this._setLikeCard();
     this._addDeleteBtn();
     this.element.querySelector('.card__img').addEventListener('click', () => this._openPopupImg({img: this.img, text: this.title}));
@@ -36,16 +35,6 @@ export default class Card {
     const cardTemplate = document.querySelector(this._template);
 		const newCard = cardTemplate.content.cloneNode(true);
     return newCard;
-  }
-
-  _deleteCard() {
-
-
-
-    // this.btnDelete.addEventListener('click', function (evt) {
-    //   const currentElement = evt.target;
-    //   currentElement.parentElement.remove();
-    // });
   }
 
   _setLikeCard() {

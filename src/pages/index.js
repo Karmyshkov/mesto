@@ -40,6 +40,7 @@ function createCard (newItem) {
     deleteCardHandler: (evt) => {
 
       const currentElement = evt.target.parentElement;
+      popupDeleteCard.openPopup();
 
       popupDeleteCard.setActionHandler((evt) => {
         evt.preventDefault();
@@ -123,17 +124,7 @@ const popupEditAvatar = new PopupWithForm('.popup_type_edit-avatar', {
 })
 popupEditAvatar.setEventListeners();
 
-const popupDeleteCard = new PopupConfirm('.popup_type_delete-card', {
-  handlerSubmitForm: (evt) => {
-
-    // api.deleteCard(currentIdCard)
-    //   .then(cardData => {
-    //     console.log(cardData);
-    //     popupDeleteCard.closePopup();
-    //   })
-    //   .catch(error => console.log(error))
-  }
-})
+const popupDeleteCard = new PopupConfirm('.popup_type_delete-card');
 popupDeleteCard.setEventListeners();
 
 con.btnEdit.addEventListener('click', () => {
